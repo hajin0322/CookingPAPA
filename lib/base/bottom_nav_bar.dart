@@ -1,6 +1,8 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:group_project/screens/my_fridge.dart';
+import 'package:group_project/screens/my_profile.dart';
+import 'package:group_project/screens/recipe_search.dart';
 
 import '../screens/home_screen.dart';
 
@@ -14,13 +16,9 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   final appScreens = [
     const HomeScreen(),
-    const Center(
-      child: Text("RecipeSearch"),
-    ),
+    const RecipeSearch(),
     const MyFridge(),
-    const Center(
-      child: Text("MyProfile"),
-    ),
+    const MyProfile(),
   ];
 
   int _selectedIndex = 0;
