@@ -1,7 +1,4 @@
-import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:group_project/base/res/media.dart';
-
 import '../base/res/styles/app_styles.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,7 +12,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    
+
     return Scaffold(
       backgroundColor: AppStyles.bgColor,
       body: ListView(
