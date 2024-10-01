@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../base/res/media.dart';
 import '../base/res/styles/app_styles.dart';
 
-class MyProfile extends StatefulWidget {
-  const MyProfile({super.key});
+class Settings extends StatefulWidget {
+  const Settings({super.key});
 
   @override
-  State<MyProfile> createState() => _MyProfileState();
+  State<Settings> createState() => _SettingsState();
 }
 
-class _MyProfileState extends State<MyProfile> {
+class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -27,13 +28,8 @@ class _MyProfileState extends State<MyProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "MyProfile",
+                        "Settings",
                         style: AppStyles.headLineStyle1,
-                      ),
-                      const Icon(
-                        Icons.notifications,
-                        color: Colors.blueGrey,
-                        size: 35,
                       )
                     ],
                   ),
@@ -41,7 +37,35 @@ class _MyProfileState extends State<MyProfile> {
                   const SizedBox(height: 10),
                   // RECIPE Widget
                   SizedBox(
-                    height: 200,
+                    height: 70,
+                    width: size.width * 0.9,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 12),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: AppStyles.layoutColor),
+                      child: const Text("Reset Fridge"),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  // RECIPE Widget
+                  SizedBox(
+                    height: 70,
+                    width: size.width * 0.9,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 12),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: AppStyles.layoutColor),
+                      child: const Text("Dark Mode"),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  // RECIPE Widget
+                  SizedBox(
+                    height: 70,
                     width: size.width * 0.9,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -54,7 +78,7 @@ class _MyProfileState extends State<MyProfile> {
                   const SizedBox(height: 10),
                   // RECIPE Widget
                   SizedBox(
-                    height: 200,
+                    height: 70,
                     width: size.width * 0.9,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -64,19 +88,8 @@ class _MyProfileState extends State<MyProfile> {
                           color: AppStyles.layoutColor),
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  // RECIPE Widget
-                  SizedBox(
-                    height: 200,
-                    width: size.width * 0.9,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 12),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppStyles.layoutColor),
-                    ),
-                  )
+                  // IMAGE
+                  Image.asset(AppMedia.photo)
                 ],
               ))
         ]));

@@ -1,7 +1,7 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:group_project/screens/my_fridge.dart';
-import 'package:group_project/screens/my_profile.dart';
+import 'package:group_project/screens/settings.dart';
 import 'package:group_project/screens/recipe_search.dart';
 
 import '../screens/home_screen.dart';
@@ -18,7 +18,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const HomeScreen(),
     const RecipeSearch(),
     const MyFridge(),
-    const MyProfile(),
+    const Settings(),
   ];
 
   int _selectedIndex = 0;
@@ -50,12 +50,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 activeIcon: Icon(FluentSystemIcons.ic_fluent_search_filled),
                 label: "RecipeSearch"),
             BottomNavigationBarItem(
-                icon: Icon(FluentSystemIcons.ic_fluent_food_regular),
-                activeIcon: Icon(FluentSystemIcons.ic_fluent_food_filled),
+                icon: Icon(FluentSystemIcons.ic_fluent_folder_regular),
+                activeIcon: Icon(FluentSystemIcons.ic_fluent_folder_filled),
                 label: "RecipeStorage"),
             BottomNavigationBarItem(
-                icon: Icon(FluentSystemIcons.ic_fluent_person_regular),
-                activeIcon: Icon(FluentSystemIcons.ic_fluent_person_filled),
+                icon: Icon(FluentSystemIcons.ic_fluent_settings_regular),
+                activeIcon: Icon(FluentSystemIcons.ic_fluent_settings_filled),
                 label: "MyFridge"),
           ]),
     );
