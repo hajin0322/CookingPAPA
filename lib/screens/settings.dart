@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
 import '../base/res/styles/app_styles.dart';
+import '../base/widgets/app_bar.dart';
 
-class Settings extends StatefulWidget {
+class Settings extends StatelessWidget {
   const Settings({super.key});
 
   @override
-  State<Settings> createState() => _SettingsState();
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      appBar: CustomAppBar(stringText: "Settings"),
+      body: SettingsState(),
+    );
+  }
 }
 
-class _SettingsState extends State<Settings> {
+
+class SettingsState extends StatefulWidget {
+  const SettingsState({super.key});
+
+  @override
+  State<SettingsState> createState() => _SettingsState();
+}
+
+class _SettingsState extends State<SettingsState> {
   bool resetCheckBox = false;
 
   void _showResetPopup() {
@@ -149,16 +163,6 @@ class _SettingsState extends State<Settings> {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       children: [
-                        // AppBar Widget
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Settings",
-                              style: AppStyles.headLineStyle1,
-                            )
-                          ],
-                        ),
                         const SizedBox(height: 40),
                         const SizedBox(height: 10),
                         // Reset Fridge Widget

@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:group_project/base/res/media.dart';
+import 'package:group_project/base/widgets/app_bar.dart';
 import '../base/res/styles/app_styles.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      appBar: CustomAppBar(stringText: "What are you Cooking Today?"),
+      body: HomeScreenState(),
+    );
+  }
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends StatefulWidget {
+  const HomeScreenState({super.key});
+
+  @override
+  State<HomeScreenState> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreenState> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -23,26 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                // AppBar Widget
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("CookingPAPA", style: AppStyles.headLineStyle3),
-                        const SizedBox(height: 5),
-                        Text("What are you Cooking Today?",
-                            style: AppStyles.headLineStyle1)
-                      ],
-                    ),
-                    const Icon(
-                      Icons.notifications,
-                      color: Colors.blueGrey,
-                      size: 35,
-                    ),
-                  ],
-                ),
                 const SizedBox(height: 20),
                 // RECIPE Widget
                 SizedBox(

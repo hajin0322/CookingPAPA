@@ -14,7 +14,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  final appScreens = [
+  final appScreens = <Widget>[
     const HomeScreen(),
     const RecipeSearch(),
     const MyFridge(),

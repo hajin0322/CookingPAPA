@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:group_project/base/widgets/app_bar.dart';
 import 'package:group_project/screens/recipe_search_results.dart';
 
 import '../base/res/styles/app_styles.dart';
 
-class RecipeSearch extends StatefulWidget {
+
+class RecipeSearch extends StatelessWidget {
   const RecipeSearch({super.key});
 
   @override
-  State<RecipeSearch> createState() => _RecipeSearchState();
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      appBar: CustomAppBar(stringText: "Recipe Search"),
+      body: RecipeSearchState(),
+    );
+  }
 }
 
-class _RecipeSearchState extends State<RecipeSearch> {
+
+class RecipeSearchState extends StatefulWidget {
+  const RecipeSearchState({super.key});
+
+  @override
+  State<RecipeSearchState> createState() => _RecipeSearchState();
+}
+
+class _RecipeSearchState extends State<RecipeSearchState> {
   bool _isChecked1 = false; //처음 상태 -> 체크 안됨
   bool _isChecked2 = false;
   bool _isChecked3 = false;
@@ -61,23 +76,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
           Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(children: [
-                // AppBar Widget
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "RecipeSearch",
-                      style: AppStyles.headLineStyle1,
-                    ),
-                    const Icon(
-                      Icons.notifications,
-                      color: Colors.blueGrey,
-                      size: 35,
-                    )
-                  ],
-                ),
-                const SizedBox(height: 40),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 Column(
                   children: [
                     ExpansionTile(

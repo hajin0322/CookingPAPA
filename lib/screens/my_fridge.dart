@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:group_project/base/res/styles/app_styles.dart';
 
-class MyFridge extends StatefulWidget {
+import '../base/widgets/app_bar.dart';
+
+class MyFridge extends StatelessWidget {
   const MyFridge({super.key});
 
   @override
-  State<MyFridge> createState() => _RecipeStorageState();
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      appBar: CustomAppBar(stringText: "My Fridge"),
+      body: MyFridgeState(),
+    );
+  }
 }
 
-class _RecipeStorageState extends State<MyFridge> {
+class MyFridgeState extends StatefulWidget {
+  const MyFridgeState({super.key});
+
+  @override
+  State<MyFridgeState> createState() => _RecipeStorageState();
+}
+
+class _RecipeStorageState extends State<MyFridgeState> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -22,20 +36,7 @@ class _RecipeStorageState extends State<MyFridge> {
               child: Column(
                 children: [
                   // AppBar Widget
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "My Fridge",
-                        style: AppStyles.headLineStyle1,
-                      ),
-                      const Icon(
-                        Icons.notifications,
-                        color: Colors.blueGrey,
-                        size: 35,
-                      )
-                    ],
-                  ),
+
                   const SizedBox(height: 40),
                   // Search Widget
                   // Container(
