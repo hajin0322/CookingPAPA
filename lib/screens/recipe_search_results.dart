@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:group_project/base/res/media.dart';
-import 'package:group_project/screens/home_screen.dart';
 import '../base/res/styles/app_styles.dart';
+import 'detail_recipe.dart';
 
 class RecipeSearchResults extends StatefulWidget {
   const RecipeSearchResults(
@@ -76,12 +76,11 @@ class _RecipeSearchResultsState extends State<RecipeSearchResults> {
                       ),
                       Flexible(
                         child: ElevatedButton(
-                          onPressed: () async {
+                          onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const HomeScreen(),
-                                settings: const RouteSettings(),
+                                builder: (context) => const DetailRecipe(),
                               ),
                             );
                           },
@@ -117,12 +116,11 @@ class _RecipeSearchResultsState extends State<RecipeSearchResults> {
                     ),
                     Flexible(
                       child: ElevatedButton(
-                        onPressed: () async {
+                        onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const HomeScreen(),
-                              settings: const RouteSettings(),
+                              builder: (context) => const DetailRecipe(),
                             ),
                           );
                         },
