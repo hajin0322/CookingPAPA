@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:group_project/base/res/media.dart';
 import 'package:group_project/base/widgets/app_bar.dart';
 import 'package:group_project/base/widgets/recipe_section.dart';
+import 'package:group_project/screens/detail_recipe.dart';
 import 'package:group_project/screens/saved_recipe.dart';
 import '../base/res/styles/app_styles.dart';
 
@@ -35,51 +36,61 @@ class _HomeScreenState extends State<HomeScreenState> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            RecipeSection(
-                title: "Recommended For You",
-                imagePath: AppMedia.food1,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SavedRecipe()),
-                  ); // 레시피 저장 페이지로 이동하는 로직
-                }),
-            RecipeSection(
-                title: "Recommended For You",
-                imagePath: AppMedia.food1,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SavedRecipe()),
-                  ); // 레시피 저장 페이지로 이동하는 로직
-                }),
-            RecipeSection(
-                title: "Recommended For You",
-                imagePath: AppMedia.food1,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SavedRecipe()),
-                  ); // 레시피 저장 페이지로 이동하는 로직
-                }),
-            RecipeSection(
-                title: "Recommended For You",
-                imagePath: AppMedia.food1,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SavedRecipe()),
-                  ); // 레시피 저장 페이지로 이동하는 로직
-                }),
-            RecipeSection(
-                title: "Recommended For You",
-                imagePath: AppMedia.food1,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SavedRecipe()),
-                  ); // 레시피 저장 페이지로 이동하는 로직
-                })
+            HomeScreenRecipeSection(
+              title: "Recommended For You",
+              imagePath: AppMedia.food1,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DetailRecipe()),
+                ); // 레시피 저장 페이지로 이동하는 로직
+              },
+              edgeTop: 20,
+            ),
+            HomeScreenRecipeSection(
+              title: "",
+              imagePath: AppMedia.food1,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DetailRecipe()),
+                ); // 레시피 저장 페이지로 이동하는 로직
+              },
+              edgeTop: 0,
+            ),
+            HomeScreenRecipeSection(
+              title: "",
+              imagePath: AppMedia.food1,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DetailRecipe()),
+                ); // 레시피 저장 페이지로 이동하는 로직
+              },
+              edgeTop: 0,
+            ),
+            HomeScreenRecipeSection(
+              title: "",
+              imagePath: AppMedia.food1,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DetailRecipe()),
+                ); // 레시피 저장 페이지로 이동하는 로직
+              },
+              edgeTop: 0,
+            ),
+            HomeScreenRecipeSection(
+              title: "",
+              imagePath: AppMedia.food1,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DetailRecipe()),
+                ); // 레시피 저장 페이지로 이동하는 로직
+              },
+              edgeTop: 0,
+            )
           ],
         ),
       ],

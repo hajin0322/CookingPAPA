@@ -28,31 +28,33 @@ class MyFridgeBody extends StatefulWidget {
 class _MyFridgeBodyState extends State<MyFridgeBody> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        RecipeSection(
-          title: 'Recently viewed 5 Recipes',
-          imagePath: 'assets/CookingPAPA/doenJang_ggiGae.jpg',
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const RecentlyViewedRecipe()),
-            ); // 최근 5개 페이지로 이동하는 로직
-          },
-        ),
-        RecipeSection(
-          title: 'Saved Recipes',
-          imagePath: 'assets/CookingPAPA/kimchiggigae.jpg',
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SavedRecipe()),
-            ); // 레시피 저장 페이지로 이동하는 로직
-          },
-        ),
-      ],
-    );
+    return ListView(children: [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MyFridgeRecipeSection(
+            title: 'Recently viewed 5 Recipes',
+            imagePath: 'assets/CookingPAPA/doenJang_ggiGae.jpg',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const RecentlyViewedRecipe()),
+              ); // 최근 5개 페이지로 이동하는 로직
+            },
+          ),
+          MyFridgeRecipeSection(
+            title: 'Saved Recipes',
+            imagePath: 'assets/CookingPAPA/kimchiggigae.jpg',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SavedRecipe()),
+              ); // 레시피 저장 페이지로 이동하는 로직
+            },
+          ),
+        ],
+      ),
+    ]);
   }
 }
