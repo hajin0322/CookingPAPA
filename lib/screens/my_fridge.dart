@@ -7,26 +7,26 @@ class MyFridge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: Costom,
       body: const MyFridgeBody(),
       );
   }
 
-  PreferredSizeWidget _buildAppBar() {
-    return AppBar(
-      backgroundColor: AppStyles.bgColor,
-      elevation: 0,
-      centerTitle: true,
-      toolbarHeight: 100,
-      title: Padding(
-        padding: const EdgeInsets.only(top: 15), // 여백 추가
-        child: Text(
-          "My Fridge",
-          style: AppStyles.headLineStyle1,
-        ),
-      ),
-    );
-  }
+  // PreferredSizeWidget _buildAppBar() {
+  //   return AppBar(
+  //     backgroundColor: AppStyles.bgColor,
+  //     elevation: 0,
+  //     centerTitle: true,
+  //     toolbarHeight: 100,
+  //     title: Padding(
+  //       padding: const EdgeInsets.only(top: 15), // 여백 추가
+  //       child: Text(
+  //         "My Fridge",
+  //         style: AppStyles.headLineStyle1,
+  //       ),
+  //     ),
+  //   );
+  // }
 }
 
 
