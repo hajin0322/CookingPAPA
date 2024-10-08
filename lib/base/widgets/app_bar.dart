@@ -4,15 +4,15 @@ import '../res/styles/app_styles.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   final double height;
-  final String stringText;
+  final String title;
 
-  const CustomAppBar({super.key, required this.stringText, this.height = 100});
+  const CustomAppBar({super.key, required this.title, this.height = 100});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       toolbarHeight: height,
-        title: Text(stringText, style: AppStyles.headLineStyle1,),
+        title: Text(title, style: AppStyles.headLineStyle1,),
         backgroundColor: AppStyles.bgColor,
         elevation: 0.0
     );

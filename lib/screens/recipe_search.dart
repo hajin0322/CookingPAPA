@@ -11,7 +11,7 @@ class RecipeSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: CustomAppBar(stringText: "Recipe Search"),
+      appBar: CustomAppBar(title: "Recipe Search"),
       body: RecipeSearchState(),
     );
   }

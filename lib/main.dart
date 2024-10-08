@@ -16,3 +16,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+// ********* my_fridge 말고 유일하게 변한곳 -> bottom nav bar의 bottomNavBarState!!! 표시해뒀음.

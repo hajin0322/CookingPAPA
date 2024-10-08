@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: CustomAppBar(stringText: "What are you Cooking Today?"),
+      appBar: CustomAppBar(title: "What are you Cooking Today?"),
       body: HomeScreenState(),
     );
   }
