@@ -1,99 +1,88 @@
 import 'package:flutter/material.dart';
 import 'package:group_project/base/res/styles/app_styles.dart';
 
-class MyFridge extends StatefulWidget {
+class MyFridge extends StatelessWidget {
   const MyFridge({super.key});
 
   @override
-  State<MyFridge> createState() => _RecipeStorageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _buildAppBar(),
+      body: const MyFridgeBody(),
+      );
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    return AppBar(
+      backgroundColor: AppStyles.bgColor,
+      elevation: 0,
+      centerTitle: true,
+      toolbarHeight: 100,
+      title: Padding(
+        padding: const EdgeInsets.only(top: 15), // 여백 추가
+        child: Text(
+          "My Fridge",
+          style: AppStyles.headLineStyle1,
+        ),
+      ),
+    );
+  }
 }
 
-class _RecipeStorageState extends State<MyFridge> {
+
+
+class MyFridgeBody extends StatefulWidget {
+  const MyFridgeBody({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _MyFridgeBodyState();
+}
+
+class _MyFridgeBodyState extends State<MyFridgeBody> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    return Scaffold(
-        backgroundColor: AppStyles.bgColor,
-        body: ListView(children: [
-          const SizedBox(height: 40),
-          Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  // AppBar Widget
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "My Fridge",
-                        style: AppStyles.headLineStyle1,
-                      ),
-                      const Icon(
-                        Icons.notifications,
-                        color: Colors.blueGrey,
-                        size: 35,
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 40),
-                  // Search Widget
-                  // Container(
-                  //   height: 55,
-                  //   width: size.width * 0.9,
-                  //   padding: const EdgeInsets.symmetric(
-                  //       horizontal: 12, vertical: 12),
-                  //   decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(10),
-                  //       color: const Color(0xFFF4F6FD)),
-                  //   child: const Row(
-                  //     children: [
-                  //       Icon(
-                  //         FluentSystemIcons.ic_fluent_search_regular,
-                  //         color: Color(0xFFBFC205),
-                  //       ),
-                  //       SizedBox(width: 10),
-                  //       Expanded(
-                  //         child: TextField(
-                  //           decoration: InputDecoration(
-                  //             border: InputBorder.none,
-                  //             hintText: "search",
-                  //           ),
-                  //         ),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
-                  const SizedBox(height: 10),
-                  // RECIPE Widget
-                  SizedBox(
-                    height: 300,
-                    width: size.width * 0.9,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 12),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppStyles.layoutColor),
-                      child: const Text("Recently Viewed 5 Recipes"),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  // RECIPE Widget
-                  SizedBox(
-                    height: 300,
-                    width: size.width * 0.9,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 12),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppStyles.layoutColor),
-                      child: const Text("Saved Recipes"),
-                    ),
-                  )
-                ],
-              ))
-        ]));
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+          child: Text(
+            'Recently viewed 5 Recipes',
+            style: AppStyles.headLineStyle2,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20), // 모서리 둥글기 조절
+            child: Image.asset(
+              'assets/CookingPAPA/doenJang_ggiGae.jpg',
+              width: 400, // 원하는 너비
+              height: 300, // 원하는 높이
+              fit: BoxFit.cover, // 이미지 맞춤 방식
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+          child: Text(
+            'Saved Recipes',
+            style: AppStyles.headLineStyle2,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20), // 모서리 둥글기 조절
+            child: Image.asset(
+              'assets/CookingPAPA/kimchiggigae.jpg',
+              width: 400, // 원하는 너비
+              height: 300, // 원하는 높이
+              fit: BoxFit.cover, // 이미지 맞춤 방식
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

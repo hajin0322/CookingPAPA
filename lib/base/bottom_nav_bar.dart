@@ -17,7 +17,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final appScreens = [
     const HomeScreen(),
     const RecipeSearch(),
-    const MyFridge(),
+    const MyFridge(),    //my_fridge 말고 변한곳 유일하게..
     const Settings(),
   ];
 
