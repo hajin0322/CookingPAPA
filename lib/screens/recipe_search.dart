@@ -4,19 +4,25 @@ import 'package:group_project/screens/recipe_search_results.dart';
 
 import '../base/res/styles/app_styles.dart';
 
-
 class RecipeSearch extends StatelessWidget {
   const RecipeSearch({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomAppBar(title: "Recipe Search"),
-      body: RecipeSearchState(),
+    return Scaffold(
+      appBar: const CustomAppBar(title: "Recipe Search"),
+      body: const RecipeSearchState(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print('새 레시피 추가');
+        },
+        backgroundColor: AppStyles.bgColor,
+        child: const Icon(Icons.search),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
-
 
 class RecipeSearchState extends StatefulWidget {
   const RecipeSearchState({super.key});
@@ -107,11 +113,11 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                           style: AppStyles.textStyle,
                                         ),
                                         Checkbox(
-                                          //체크박스 위젯
+                                            //체크박스 위젯
                                             value: _isChecked1,
                                             onChanged: (value) {
                                               setState(
-                                                    () {
+                                                () {
                                                   _isChecked1 = value!;
                                                 },
                                               );
@@ -127,7 +133,7 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                             value: _isChecked2,
                                             onChanged: (value) {
                                               setState(
-                                                    () {
+                                                () {
                                                   _isChecked2 = value!;
                                                 },
                                               );
@@ -154,7 +160,7 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                   children: [
                                     Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.start,
+                                          MainAxisAlignment.start,
                                       children: [
                                         Row(
                                           children: [
@@ -164,7 +170,7 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                                 value: _isChecked3,
                                                 onChanged: (value) {
                                                   setState(
-                                                        () {
+                                                    () {
                                                       _isChecked3 = value!;
                                                     },
                                                   );
@@ -180,7 +186,7 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                                 value: _isChecked4,
                                                 onChanged: (value) {
                                                   setState(
-                                                        () {
+                                                    () {
                                                       _isChecked4 = value!;
                                                     },
                                                   );
@@ -228,7 +234,7 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                             value: _isChecked5,
                                             onChanged: (value) {
                                               setState(
-                                                    () {
+                                                () {
                                                   _isChecked5 = value!;
                                                 },
                                               );
@@ -244,7 +250,7 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                             value: _isChecked6,
                                             onChanged: (value) {
                                               setState(
-                                                    () {
+                                                () {
                                                   _isChecked6 = value!;
                                                 },
                                               );
@@ -280,7 +286,7 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                             value: _isChecked7,
                                             onChanged: (value) {
                                               setState(
-                                                    () {
+                                                () {
                                                   _isChecked7 = value!;
                                                 },
                                               );
@@ -296,7 +302,7 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                             value: _isChecked8,
                                             onChanged: (value) {
                                               setState(
-                                                    () {
+                                                () {
                                                   _isChecked8 = value!;
                                                 },
                                               );
@@ -341,7 +347,7 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                           value: _isChecked9,
                                           onChanged: (value) {
                                             setState(
-                                                  () {
+                                              () {
                                                 _isChecked9 = value!;
                                               },
                                             );
@@ -358,7 +364,7 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                         value: _isChecked10,
                                         onChanged: (value) {
                                           setState(
-                                                () {
+                                            () {
                                               _isChecked10 = value!;
                                             },
                                           );
@@ -392,7 +398,7 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                             value: _isChecked11,
                                             onChanged: (value) {
                                               setState(
-                                                    () {
+                                                () {
                                                   _isChecked11 = value!;
                                                 },
                                               );
@@ -408,7 +414,7 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                             value: _isChecked12,
                                             onChanged: (value) {
                                               setState(
-                                                    () {
+                                                () {
                                                   _isChecked12 = value!;
                                                 },
                                               );
@@ -449,7 +455,7 @@ class _RecipeSearchState extends State<RecipeSearchState> {
                                 MaterialPageRoute(
                                   builder: (context) => RecipeSearchResults(
                                     result:
-                                    _selectedTexts, //다음 화면의 result에  _selectedTexts를 전달
+                                        _selectedTexts, //다음 화면의 result에  _selectedTexts를 전달
                                   ),
                                   settings: RouteSettings(
                                     arguments: _selectedTexts,
