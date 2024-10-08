@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:group_project/base/res/styles/app_styles.dart';
 
+import '../base/widgets/app_bar.dart';
+
 class MyFridge extends StatelessWidget {
   const MyFridge({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: Costom,
-      body: const MyFridgeBody(),
+    return const Scaffold(
+      appBar: CustomAppBar(stringText: "My fridge"),
+      body: MyFridgeBody(),
       );
   }
 
