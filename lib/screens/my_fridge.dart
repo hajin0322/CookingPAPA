@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:group_project/base/res/styles/app_styles.dart';
-
 import '../base/widgets/app_bar.dart';
 
 class MyFridge extends StatelessWidget {
@@ -9,29 +8,11 @@ class MyFridge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: CustomAppBar(stringText: "My fridge"),
+      appBar: CustomAppBar(title: "My fridge"),
       body: MyFridgeBody(),
       );
   }
-
-  // PreferredSizeWidget _buildAppBar() {
-  //   return AppBar(
-  //     backgroundColor: AppStyles.bgColor,
-  //     elevation: 0,
-  //     centerTitle: true,
-  //     toolbarHeight: 100,
-  //     title: Padding(
-  //       padding: const EdgeInsets.only(top: 15), // 여백 추가
-  //       child: Text(
-  //         "My Fridge",
-  //         style: AppStyles.headLineStyle1,
-  //       ),
-  //     ),
-  //   );
-  // }
 }
-
-
 
 class MyFridgeBody extends StatefulWidget {
   const MyFridgeBody({super.key});
@@ -47,39 +28,39 @@ class _MyFridgeBodyState extends State<MyFridgeBody> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+          padding: const EdgeInsets.only(left: 40, top: 16),
           child: Text(
             'Recently viewed 5 Recipes',
             style: AppStyles.headLineStyle2,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+          padding: const EdgeInsets.only(left: 40, right: 70, top: 20, bottom: 30),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20), // 모서리 둥글기 조절
             child: Image.asset(
-              'assets/CookingPAPA/doenJang_ggiGae.jpg',
-              width: 400, // 원하는 너비
-              height: 300, // 원하는 높이
+              'assets/CookingPAPA/doenJang_ggiGae.jpg', //이미지를 누르면 최근 5개 페이지로 이동
+              width: 300, // 원하는 너비
+              height: 267, // 원하는 높이
               fit: BoxFit.cover, // 이미지 맞춤 방식
             ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+          padding: const EdgeInsets.only(left: 40, top: 16),
           child: Text(
             'Saved Recipes',
             style: AppStyles.headLineStyle2,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+          padding: const EdgeInsets.only(left: 40, right: 70, top: 20, bottom: 30),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20), // 모서리 둥글기 조절
             child: Image.asset(
-              'assets/CookingPAPA/kimchiggigae.jpg',
-              width: 400, // 원하는 너비
-              height: 300, // 원하는 높이
+              'assets/CookingPAPA/kimchiggigae.jpg',  //이미지를 누르면 레시피 저장 페이지로 이동
+              width: 300, // 원하는 너비
+              height: 267, // 원하는 높이
               fit: BoxFit.cover, // 이미지 맞춤 방식
             ),
           ),
