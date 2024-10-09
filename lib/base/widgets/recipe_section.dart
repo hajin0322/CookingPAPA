@@ -105,7 +105,6 @@ class MyFridgeRecipeSection extends StatelessWidget {
   }
 }
 
-// 이건 내껑
 class HomeScreenRecipeSection extends StatelessWidget {
   final String title;
   final String imagePath;
@@ -130,7 +129,7 @@ class HomeScreenRecipeSection extends StatelessWidget {
             TitlePadding(title: title),
             Expanded(child: Container()),
             const Padding(
-                padding: EdgeInsets.only(left: 40, top: 16, right: 40),
+                padding: EdgeInsets.only(left: 40, top: 10, right: 40),
                 child: Icon(FluentSystemIcons.ic_fluent_star_filled))
           ],
         ),
