@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:group_project/base/res/media.dart';
 import 'package:group_project/base/widgets/app_bar.dart';
+import 'package:group_project/base/widgets/recipe_section.dart';
+import 'package:group_project/screens/detail_recipe.dart';
+import 'package:group_project/screens/saved_recipe.dart';
 import '../base/res/styles/app_styles.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,9 +11,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomAppBar(title: "What are you Cooking Today?"),
-      body: HomeScreenState(),
+    return Scaffold(
+      appBar: const CustomAppBar(title: "What are you Cooking Today?"),
+      body: const HomeScreenState(),
+      backgroundColor: AppStyles.bgColor,
     );
   }
 }
@@ -27,7 +31,74 @@ class _HomeScreenState extends State<HomeScreenState> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Scaffold(
+    return ListView(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            HomeScreenRecipeSection(
+              title: "Recommended For You",
+              imagePath: AppMedia.food1,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DetailRecipe()),
+                ); // 레시피 저장 페이지로 이동하는 로직
+              },
+              edgeTop: 20,
+            ),
+            HomeScreenRecipeSection(
+              title: "",
+              imagePath: AppMedia.food1,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DetailRecipe()),
+                ); // 레시피 저장 페이지로 이동하는 로직
+              },
+              edgeTop: 0,
+            ),
+            HomeScreenRecipeSection(
+              title: "",
+              imagePath: AppMedia.food1,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DetailRecipe()),
+                ); // 레시피 저장 페이지로 이동하는 로직
+              },
+              edgeTop: 0,
+            ),
+            HomeScreenRecipeSection(
+              title: "",
+              imagePath: AppMedia.food1,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DetailRecipe()),
+                ); // 레시피 저장 페이지로 이동하는 로직
+              },
+              edgeTop: 0,
+            ),
+            HomeScreenRecipeSection(
+              title: "",
+              imagePath: AppMedia.food1,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DetailRecipe()),
+                ); // 레시피 저장 페이지로 이동하는 로직
+              },
+              edgeTop: 0,
+            )
+          ],
+        ),
+      ],
+    );
+  }
+}
+/*
+      Scaffold(
       backgroundColor: AppStyles.bgColor,
       body: ListView(
         children: [
@@ -49,6 +120,16 @@ class _HomeScreenState extends State<HomeScreenState> {
                         color: AppStyles.layoutColor),
                     child: Column(
                       children: [
+                        RecipeSection(
+                            title: "Recommended For You",
+                            imagePath: AppMedia.food1,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SavedRecipe()),
+                              ); // 레시피 저장 페이지로 이동하는 로직
+                            }),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -125,3 +206,4 @@ class _HomeScreenState extends State<HomeScreenState> {
     );
   }
 }
+*/
