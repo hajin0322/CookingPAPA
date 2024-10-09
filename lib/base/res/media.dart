@@ -6,4 +6,5 @@ class AppMedia {
   static const food2 = "$_baseImage/bibimbap.png";
   static const recipe1 = "$_baseImage/KimchiRecipe1.png";
   static const recipe2 = "$_baseImage/KimchiRecipe2.png";
+  static const doenjang_jjigae = "$_baseImage/doenjang_jjigae.png";
 }
