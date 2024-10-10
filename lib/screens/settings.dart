@@ -14,7 +14,6 @@ class Settings extends StatelessWidget {
   }
 }
 
-
 class SettingsState extends StatefulWidget {
   const SettingsState({super.key});
 
@@ -84,8 +83,8 @@ class _SettingsState extends State<SettingsState> {
                   ElevatedButton(
                     onPressed: resetCheckBox
                         ? () {
-                            // 기능 추가 예정
-                          }
+                      // 기능 추가 예정
+                    }
                         : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: resetCheckBox
@@ -151,86 +150,104 @@ class _SettingsState extends State<SettingsState> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: AppStyles.bgColor,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ListView(
-              shrinkWrap: true,
-              children: [
-                const SizedBox(height: 40),
-                Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 40),
-                        const SizedBox(height: 10),
-                        // Reset Fridge Widget
-                        SizedBox(
-                          height: 70,
-                          width: size.width * 0.9,
-                          child: GestureDetector(
-                            onTap: _showResetPopup,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 12),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppStyles.layoutColor),
-                              child: const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("Reset Fridge"),
-                                  Icon(Icons.arrow_forward_ios)
-                                ],
-                              ),
-                            ),
+      backgroundColor: AppStyles.bgColor,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          ListView(
+            shrinkWrap: true,
+            children: [
+              const SizedBox(height: 40),
+              // Divider Bar Below Settings Title
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                height: 2,
+                color: Colors.grey[400], // Set a light gray color for the bar
+              ),
+              const SizedBox(height: 40),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 40),
+                    const SizedBox(height: 10),
+                    // Reset Fridge Widget
+                    SizedBox(
+                      height: 70,
+                      width: size.width * 0.9,
+                      child: GestureDetector(
+                        onTap: _showResetPopup,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 12),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppStyles.layoutColor),
+                          child: const Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Reset Fridge"),
+                              Icon(Icons.arrow_forward_ios)
+                            ],
                           ),
                         ),
-                        const SizedBox(height: 10),
-                        // App Info Widget
-                        SizedBox(
-                          height: 70,
-                          width: size.width * 0.9,
-                          child: GestureDetector(
-                            onTap: _showAppInfoPopup,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 12),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppStyles.layoutColor),
-                              child: const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("App Info"),
-                                  Icon(Icons.arrow_forward_ios)
-                                ],
-                              ),
-                            ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    // App Info Widget
+                    SizedBox(
+                      height: 70,
+                      width: size.width * 0.9,
+                      child: GestureDetector(
+                        onTap: _showAppInfoPopup,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 12),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppStyles.layoutColor),
+                          child: const Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("App Info"),
+                              Icon(Icons.arrow_forward_ios)
+                            ],
                           ),
                         ),
-                      ],
-                    )),
-              ],
-            ),
-            // Version Information at the bottom
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Text(
-                  "Version 0.0.1",
-                  style: TextStyle(
-                    color: Colors.grey[600], // Light gray color
-                    fontSize: 12,
-                  ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10), // 위쪽에 10만큼의 여백만 남김
+                child: Image.asset(
+                  'assets/CookingPAPA/fryingpan.png',
+                  width: 280,
+                  height: 240,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ],
+          ),
+          // Version Information at the bottom
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Text(
+                "Version 0.0.1",
+                style: TextStyle(
+                  color: Colors.grey[600], // Light gray color
+                  fontSize: 12,
                 ),
               ),
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }
