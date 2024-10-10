@@ -7,14 +7,14 @@ class RecipeSearchResults extends StatefulWidget {
   const RecipeSearchResults(
       {super.key, required this.result}); //이전 화면에서 result라는 String을 받아와야함
 
-  final String result;
+  final List<String> result;
 
   @override
   State<RecipeSearchResults> createState() => _RecipeSearchResultsState();
 }
 
 class _RecipeSearchResultsState extends State<RecipeSearchResults> {
-  late String _result; //나중에 String을 정의해줌
+  late List<String> _result; //나중에 String을 정의해줌
 
   @override
   void initState() {
@@ -26,6 +26,7 @@ class _RecipeSearchResultsState extends State<RecipeSearchResults> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    String result = _result.join(', ');
     return Scaffold(
         body: ListView(children: [
           const SizedBox(height: 40),
@@ -43,7 +44,7 @@ class _RecipeSearchResultsState extends State<RecipeSearchResults> {
                         SizedBox(
                           width: size.width * 0.9,
                           child: Flexible(
-                            child: Text(_result, style: AppStyles.headLineStyle3),
+                            child: Text(result, style: AppStyles.headLineStyle3),
                           ),
                         )
                       ],

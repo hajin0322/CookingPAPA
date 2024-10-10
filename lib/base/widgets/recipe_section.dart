@@ -3,27 +3,35 @@ import 'package:flutter/cupertino.dart';
 
 import '../res/styles/app_styles.dart';
 
-// 근형 내 이야기와 노고를 꼭 들어주길 바라 근형 우리 한번 성공해보자
-// 자 내가 title이랑 image padding마다 클래스를 나눠 만들려고 해
-// 왜 이런 귀찮은 일을 했냐??? 일단 우리 서로가 쓰는 이미지 크기랑 패딩 간격도 다르고
-// 형 이제 가로 스크롤이랑 title_padding에 more 버튼을 만들 걸 생각하니
-// 정신이 아득바득해지더라고 그래서 이걸 다 따로 구분하기로 했어
-// 그래서 row, column, container 등으로 조합할 수 있게끔
-// 이 요소들을 분리해서 class로 정리했어
-// 내 맘 알지 형? 사랑해
-
 class TitlePadding extends StatelessWidget {
   final String title;
+  final double leftPaddingValue;
+  final double rightPaddingValue;
+  final double topPaddingValue;
+  final double bottomPaddingValue;
+  final TextStyle? textStyle;   //textstyle도 지정할 수 있도록 만듦. 타이틀 텍스트를 변경할 수 있도록.. 상황에 맞게
 
-  const TitlePadding({super.key, required this.title});
+  // leftPaddingValue의 기본값을 40으로 설정, topPaddingValue 또한 기본값 10으로 설정. 내가 다른곳에서 변수 추가하면 바꾸기 가능합니다.
+  //텍스트 패딩을 또 컨테이너가 감쌀 수 있는 상황이 발생해서. container안에서의 padding도 설정해야해서 이렇게 추가함.
+
+  const TitlePadding({
+    super.key,
+    required this.title,
+    this.leftPaddingValue = 40,
+    this.topPaddingValue = 10,
+    this.bottomPaddingValue = 10,
+    this.rightPaddingValue = 40,
+    this.textStyle,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 40, top: 10),
+      // leftPaddingValue가 주어진 값에 따라 변경되도록 설정
+      padding: EdgeInsets.only(left: leftPaddingValue, top: topPaddingValue, bottom: bottomPaddingValue),
       child: Text(
         title,
-        style: AppStyles.headLineStyle2,
+        style: textStyle ?? AppStyles.headLineStyle2,
       ),
     );
   }
@@ -32,31 +40,36 @@ class TitlePadding extends StatelessWidget {
 class ImagePadding extends StatelessWidget {
   final String imagePath;
   final VoidCallback onTap;
-  final double edgeTop;
-  final double edgeRight;
+  final double topPaddingValue;
+  final double rightPaddingValue;
+  final double leftPaddingValue;
+  final double bottomPaddingValue;
+  final double imageWidth;
 
-  const ImagePadding(
-      {super.key,
-      required this.imagePath,
-      required this.onTap,
-      required this.edgeTop,
-      required this.edgeRight});
+  const ImagePadding({
+    super.key,
+    required this.imagePath,
+    required this.onTap,
+    this.topPaddingValue = 10,
+    this.rightPaddingValue = 40,
+    this.leftPaddingValue = 40,
+    this.bottomPaddingValue = 10,
+    this.imageWidth = 400
+  });
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Padding(
       padding:
-          EdgeInsets.only(left: 40, right: edgeRight, top: edgeTop, bottom: 30),
+          EdgeInsets.only(left: leftPaddingValue, right: rightPaddingValue, top: topPaddingValue, bottom: bottomPaddingValue),
       child: GestureDetector(
         onTap: onTap,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Image.asset(
             imagePath,
-            width: size.width,
-            height: 300,
+            width: imageWidth,
+            height: 250,
             fit: BoxFit.cover,
           ),
         ),
@@ -80,18 +93,18 @@ class MyFridgeRecipeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TitlePadding(title: title),
+        TitlePadding(title: title, leftPaddingValue: 20,),
         ImagePadding(
-            imagePath: imagePath, onTap: onTap, edgeTop: 20, edgeRight: 70),
+            imagePath: imagePath, onTap: onTap, imageWidth: size.width * 0.7, topPaddingValue: 20, rightPaddingValue: 20, leftPaddingValue: 20,),
       ],
     );
   }
 }
 
-// 이건 내껑
 class HomeScreenRecipeSection extends StatelessWidget {
   final String title;
   final String imagePath;
@@ -116,68 +129,16 @@ class HomeScreenRecipeSection extends StatelessWidget {
             TitlePadding(title: title),
             Expanded(child: Container()),
             const Padding(
-                padding: EdgeInsets.only(left: 40, top: 16, right: 40),
+                padding: EdgeInsets.only(left: 40, top: 10, right: 40),
                 child: Icon(FluentSystemIcons.ic_fluent_star_filled))
           ],
         ),
         ImagePadding(
             imagePath: imagePath,
             onTap: onTap,
-            edgeTop: edgeTop,
-            edgeRight: 40),
-      ],
-    );
-  }
-}
-
-// 이거 오리지널 근짱 코드양
-/*
-class RecipeSection extends StatelessWidget {
-  final String title;
-  final String imagePath;
-  final VoidCallback onTap;
-
-  const RecipeSection({
-    super.key,
-    required this.title,
-    required this.imagePath,
-    required this.onTap,,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery
-        .of(context)
-        .size;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 40, top: 16),
-          child: Text(
-            title,
-            style: AppStyles.headLineStyle2,
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-              left: 40, right: 70, top: 20, bottom: 30),
-          child: GestureDetector(
-            onTap: onTap,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                imagePath,
-                width: size.width,
-                height: 300,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+            topPaddingValue: edgeTop,
         ),
       ],
     );
   }
 }
-*/
