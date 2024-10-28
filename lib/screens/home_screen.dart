@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreenState> {
             givenText: 'Hello!',
           ),
           HomeScreenRecipeSection(
-            title: "Recommended For You",
+            title: "Recommended For YOU",
             imagePath: AppMedia.food1,
             onTap: () {
               Navigator.push(
