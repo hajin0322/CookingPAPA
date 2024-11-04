@@ -23,7 +23,7 @@ class _AITextState extends State<AIText> {
         right: 40,
       ),
       child: SizedBox(
-              height: 300,
+              height: 350,
               child: givenText.isNotEmpty
                   ? Text(givenText): Text("Hello World! I'm Cooking PAPA! I want to make recipe for you! Come On BBOY", style: AppStyles.aiTextStyle),
             ),

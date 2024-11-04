@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../res/media.dart';
 import '../res/styles/app_styles.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -6,14 +7,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final double titleLeftPadding;
   final String logoAssetPath;
-  final double logoSize; // 로고 크기를 위한 새 속성
+  final double logoSize;
 
   const CustomAppBar({
+    // 커스텀 앱 바 생성자
     super.key,
     required this.title,
     this.height = 100,
     this.titleLeftPadding = 40.0,
-    this.logoAssetPath = 'assets/CookingPAPA/CookingPAPA_logo_noletter.png',
+    this.logoAssetPath = AppMedia.logo,
     this.logoSize = 100, // 기본 로고 크기를 60으로 설정
   });
 

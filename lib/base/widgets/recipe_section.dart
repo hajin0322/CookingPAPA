@@ -1,6 +1,7 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../res/media.dart';
 import '../res/styles/app_styles.dart';
 
 class TitlePadding extends StatelessWidget {
@@ -128,9 +129,9 @@ class HomeScreenRecipeSection extends StatelessWidget {
           children: [
             TitlePadding(title: title),
             Expanded(child: Container()),
-            const Padding(
-                padding: EdgeInsets.only(left: 40, top: 10, right: 40),
-                child: Icon(FluentSystemIcons.ic_fluent_star_filled))
+            Padding(
+                padding: const EdgeInsets.only(left: 40, right: 40),
+                child: Image.asset(AppMedia.ai_icon, width: 28, height: 28,))
           ],
         ),
         ImagePadding(
