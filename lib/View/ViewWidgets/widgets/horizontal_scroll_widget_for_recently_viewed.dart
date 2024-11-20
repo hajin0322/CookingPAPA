@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:group_project/base/widgets/recipe_section.dart';
-import 'package:group_project/screens/detail_recipe.dart';
-import '../res/styles/app_styles.dart';
+import 'package:group_project/View/ViewWidgets/widgets/recipe_section.dart';
+
+import '../../ViewAsset/styles/app_styles.dart';
+import '../../detail_recipe.dart';
+
 
 // 레시피 모델 클래스
 class RecipePreview {

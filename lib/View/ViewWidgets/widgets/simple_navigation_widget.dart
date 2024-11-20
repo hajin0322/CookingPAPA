@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:group_project/base/res/styles/app_styles.dart';
-import 'package:group_project/base/widgets/recipe_section.dart';
+import 'package:group_project/View/ViewWidgets/widgets/recipe_section.dart';
+
+import '../../ViewAsset/styles/app_styles.dart';
 
 class SimpleNavigationBar extends StatelessWidget {
   final String title;

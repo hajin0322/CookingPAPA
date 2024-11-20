@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart'; //
-import 'package:group_project/base/bottom_nav_bar.dart';
+import 'package:group_project/View/ViewWidgets/widgets/bottom_nav_bar.dart';
 
 // main() 메소드
 void main() {

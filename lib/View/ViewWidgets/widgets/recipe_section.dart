@@ -1,8 +1,7 @@
-import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../res/media.dart';
-import '../res/styles/app_styles.dart';
+import '../../ViewAsset/media.dart';
+import '../../ViewAsset/styles/app_styles.dart';
 
 class TitlePadding extends StatelessWidget {
   final String title;

@@ -1,10 +1,11 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:group_project/base/res/styles/app_styles.dart';
-import 'package:group_project/screens/my_fridge.dart';
-import 'package:group_project/screens/settings.dart';
-import 'package:group_project/screens/recipe_search.dart';
-import '../screens/home_screen.dart';
+
+import '../../ViewAsset/styles/app_styles.dart';
+import '../../home_screen.dart';
+import '../../my_fridge.dart';
+import '../../recipe_search.dart';
+import '../../settings.dart';
 
 // BottomNavBar 클래스
 class BottomNavBar extends StatefulWidget {
