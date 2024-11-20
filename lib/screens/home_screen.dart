@@ -32,26 +32,21 @@ class HomeScreenState extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreenState> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const AIText(
-            givenText: 'Hello!',
-          ),
-          HomeScreenRecipeSection(
+    return ListView(children: [
+      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const AIText(
+          givenText: 'Hello!',
+        ),
+        RecipeSection(
             title: "Recommended For You",
             imagePath: AppMedia.food1,
             onTap: () {
               Navigator.push(
-                // 레시피 상세 페이지로 이동
-                context,
-                MaterialPageRoute(builder: (context) => const DetailRecipe()),
-              );
-            },
-            edgeTop: 20,
-          )
-        ]),
-      ],
-    );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DetailRecipe()));
+            }),
+      ])
+    ]);
   }
 }

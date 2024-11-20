@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:group_project/base/res/media.dart';
 import 'package:group_project/base/res/styles/app_styles.dart';
-import 'package:group_project/base/widgets/horizontal_scroll_widget_for_recently_viewed.dart';
-import 'package:group_project/base/widgets/simple_navigation_widget.dart';
-import 'package:group_project/screens/saved_recipe.dart';
 import '../base/widgets/app_bar.dart';
 import '../base/widgets/recipe_section.dart';
+import 'detail_recipe.dart';
 
 class MyFridge extends StatelessWidget {
   const MyFridge({super.key});
@@ -31,7 +29,39 @@ class _MyFridgeBodyState extends State<MyFridgeBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(children: [
+      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        RecipeSection(
+            title: "Saved Recipes 1",
+            imagePath: AppMedia.food2,
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DetailRecipe()));
+            }),
+        RecipeSection(
+            title: "Saved Recipes 2",
+            imagePath: AppMedia.food2,
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DetailRecipe()));
+            }),
+        RecipeSection(
+            title: "Saved Recipes 3",
+            imagePath: AppMedia.food2,
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DetailRecipe()));
+            }),
+      ])
+    ]);
+
+      /*Column(
       children: [
         SimpleNavigationBar(
           title: 'Saved Recipes',
@@ -47,6 +77,6 @@ class _MyFridgeBodyState extends State<MyFridgeBody> {
         ),
         const RecViewWidget(),
       ],
-    );
+    );*/
   }
 }
