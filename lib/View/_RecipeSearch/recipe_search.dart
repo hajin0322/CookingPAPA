@@ -4,7 +4,6 @@ import '../ViewAsset/styles/app_styles.dart';
 import '../ViewBase/app_bar.dart';
 import 'search_categories.dart';
 
-
 class RecipeSearch extends StatelessWidget {
   const RecipeSearch({super.key});
 

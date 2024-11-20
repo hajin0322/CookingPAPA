@@ -39,6 +39,7 @@ class _HomeScreenState extends State<HomeScreenState> {
         RecipeSection(
             title: "Recommended For You",
             imagePath: AppMedia.food1,
+            ico: AppMedia.ai_icon,
             onTap: () {
               Navigator.push(
                   context,

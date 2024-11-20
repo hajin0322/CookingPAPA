@@ -4,6 +4,7 @@ class AppMedia {
   static const cover = "$_baseImage/fryingpan.png";
 
   static const ai_icon = "$_baseImage/favicon.ico";
+  static const save_icon = "$_baseImage/restaurant.ico";
 
   static const food1 = "$_baseImage/porkbelly.png";
   static const food2 = "$_baseImage/bibimbap.png";

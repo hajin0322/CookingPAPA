@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-
-import '../ViewAsset/media.dart';
 import '../ViewAsset/styles/app_styles.dart';
 
 class TitlePadding extends StatelessWidget {
@@ -60,15 +58,14 @@ class RecipeSection extends StatelessWidget {
   final String title;
   final String imagePath;
   final VoidCallback onTap;
-
-  //final Icon icon;
+  final String ico;
 
   const RecipeSection({
     super.key,
     required this.title,
     required this.imagePath,
     required this.onTap,
-    //required this.icon,
+    required this.ico,
   });
 
   @override
@@ -84,7 +81,7 @@ class RecipeSection extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.only(left: 40, right: 40),
                   child: Image.asset(
-                    AppMedia.ai_icon,
+                    ico,
                     width: 28,
                     height: 28,
                   ))

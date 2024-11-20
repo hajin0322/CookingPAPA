@@ -34,6 +34,7 @@ class _MyFridgeBodyState extends State<MyFridgeBody> {
         RecipeSection(
             title: "Saved Recipes 1",
             imagePath: AppMedia.food2,
+            ico: AppMedia.save_icon,
             onTap: () {
               Navigator.push(
                   context,
@@ -43,6 +44,7 @@ class _MyFridgeBodyState extends State<MyFridgeBody> {
         RecipeSection(
             title: "Saved Recipes 2",
             imagePath: AppMedia.food2,
+            ico: AppMedia.save_icon,
             onTap: () {
               Navigator.push(
                   context,
@@ -52,6 +54,7 @@ class _MyFridgeBodyState extends State<MyFridgeBody> {
         RecipeSection(
             title: "Saved Recipes 3",
             imagePath: AppMedia.food2,
+            ico: AppMedia.save_icon,
             onTap: () {
               Navigator.push(
                   context,
