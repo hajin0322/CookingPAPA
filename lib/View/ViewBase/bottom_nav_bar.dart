@@ -1,26 +1,25 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 
-import '../../ViewAsset/styles/app_styles.dart';
-import '../../home_screen.dart';
-import '../../my_fridge.dart';
-import '../../recipe_search.dart';
-import '../../settings.dart';
+import '../ViewAsset/styles/app_styles.dart';
+import '../_HomeScreen/home_screen.dart';
+import '../_MyFridge/my_fridge.dart';
+import '../_RecipeSearch/recipe_search.dart';
+import '../_Settings/settings.dart';
 
-// BottomNavBar 클래스
+
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key}); // BottomNavBar 클래스 생성자: const 추가해 불변 객체로 설정
+  const BottomNavBar({super.key});
 
   @override
-  State<BottomNavBar> createState() => _BottomNavBarState(); // 상태 관리 클래스 생성
+  State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar>
     with TickerProviderStateMixin {
-  // TickerProviderStateMixin: 애니메이션 컨트롤러 지원
 
   late TabController
-      _tabController; // TabController: TabBar와 TabBarView 사이 동기화 및 상태 관리 (지연 초기화)
+      _tabController;
 
   // TabController 초기화
   @override

@@ -1,8 +1,7 @@
-import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../ViewAsset/media.dart';
-import '../../ViewAsset/styles/app_styles.dart';
+import '../ViewAsset/media.dart';
+import '../ViewAsset/styles/app_styles.dart';
 
 class TitlePadding extends StatelessWidget {
   final String title;
@@ -56,33 +55,6 @@ class ImagePadding extends StatelessWidget {
     );
   }
 }
-//
-// // 이거 근형꺼
-// class MyFridgeRecipeSection extends StatelessWidget {
-//   final String title;
-//   final String imagePath;
-//   final VoidCallback onTap;
-//
-//   const MyFridgeRecipeSection({
-//     super.key,
-//     required this.title,
-//     required this.imagePath,
-//     required this.onTap,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final size = MediaQuery.of(context).size;
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         TitlePadding(title: title, leftPaddingValue: 20,),
-//         ImagePadding(
-//             imagePath: imagePath, onTap: onTap, imageWidth: size.width * 0.7, topPaddingValue: 20, rightPaddingValue: 20, leftPaddingValue: 20,),
-//       ],
-//     );
-//   }
-// }
 
 class RecipeSection extends StatelessWidget {
   final String title;
@@ -91,7 +63,7 @@ class RecipeSection extends StatelessWidget {
 
   //final Icon icon;
 
-  const MyFridgeRecipeSection({
+  const RecipeSection({
     super.key,
     required this.title,
     required this.imagePath,

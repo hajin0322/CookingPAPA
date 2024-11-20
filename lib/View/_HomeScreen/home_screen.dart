@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'ViewAsset/media.dart';
-import 'ViewAsset/styles/app_styles.dart';
-import 'ViewWidgets/widgets/ai_text.dart';
-import 'ViewWidgets/widgets/app_bar.dart';
-import 'ViewWidgets/widgets/recipe_section.dart';
-import 'detail_recipe.dart';
+import '../ViewAsset/media.dart';
+import '../ViewAsset/styles/app_styles.dart';
+import 'ai_text.dart';
+import '../ViewBase/app_bar.dart';
+import '../_DetailRecipe/recipe_section.dart';
+import '../_DetailRecipe/detail_recipe.dart';
 
 // 홈 화면 클래스
 class HomeScreen extends StatelessWidget {

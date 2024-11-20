@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../ViewAsset/styles/app_styles.dart';
+import '../ViewAsset/styles/app_styles.dart';
 
 
 class AIText extends StatefulWidget {

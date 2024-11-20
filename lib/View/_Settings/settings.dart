@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'ViewAsset/styles/app_styles.dart';
-import 'ViewWidgets/widgets/app_bar.dart';
+import '../ViewAsset/styles/app_styles.dart';
+import '../ViewBase/app_bar.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});

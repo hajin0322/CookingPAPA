@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'ViewAsset/styles/app_styles.dart';
-import 'ViewWidgets/widgets/app_bar.dart';
-import 'ViewWidgets/widgets/search_categories.dart';
+import '../ViewAsset/styles/app_styles.dart';
+import '../ViewBase/app_bar.dart';
+import 'search_categories.dart';
 
 
 class RecipeSearch extends StatelessWidget {

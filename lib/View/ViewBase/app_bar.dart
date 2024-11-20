@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../res/media.dart';
-import '../../ViewAsset/media.dart';
-import '../../ViewAsset/styles/app_styles.dart';
+import '../ViewAsset/media.dart';
+import '../ViewAsset/styles/app_styles.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
@@ -39,7 +37,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Image.asset(
             logoAssetPath,
             height: logoSize, // 동적 로고 크기 적용
-            width: logoSize,  // 동적 로고 크기 적용
+            width: logoSize, // 동적 로고 크기 적용
             fit: BoxFit.contain, // 이미지가 지정된 크기에 맞게 조정되도록 함
           ),
         ),
