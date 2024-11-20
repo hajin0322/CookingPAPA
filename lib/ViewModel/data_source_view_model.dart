@@ -4,7 +4,7 @@ import 'package:group_project/model/recipe.dart'; // Recipe 모델 import
 import 'package:http/http.dart' as http; // HTTP 요청을 위한 패키지
 import 'dart:convert';
 import '../DataSource/data_source_model.dart'; // JSON 변환을 위한 패키지
-
+/*
 class DataSourceViewModel extends ChangeNotifier {
   final DataSource dataSource; // DataSource를 주입받음
   List<Recipe> resultRecipeList = []; // 결과 레시피 목록
@@ -56,4 +56,4 @@ class DataSourceViewModel extends ChangeNotifier {
       throw Exception('Failed to generate image');
     }
   }
-}
+}*/
