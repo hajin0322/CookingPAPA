@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../res/media.dart';
-import '../res/styles/app_styles.dart';
+import '../../ViewAsset/media.dart';
+import '../../ViewAsset/styles/app_styles.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;

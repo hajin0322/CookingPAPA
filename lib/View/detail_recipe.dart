@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../base/widgets/app_bar.dart';
+import 'ViewWidgets/widgets/app_bar.dart';
 
 class DetailRecipe extends StatelessWidget {
   const DetailRecipe({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../screens/recipe_search_results.dart';
-import '../res/styles/app_styles.dart';
+import '../../ViewAsset/styles/app_styles.dart';
+import '../../recipe_search_results.dart';
 
 class SearchCategories extends StatefulWidget {
   final List<Category> categories;

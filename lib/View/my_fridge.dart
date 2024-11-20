@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:group_project/base/res/media.dart';
-import 'package:group_project/base/res/styles/app_styles.dart';
-import '../base/widgets/app_bar.dart';
-import '../base/widgets/recipe_section.dart';
-import 'detail_recipe.dart';
+import 'package:group_project/View/saved_recipe.dart';
+import 'ViewAsset/styles/app_styles.dart';
+import 'ViewWidgets/widgets/app_bar.dart';
+import 'ViewWidgets/widgets/horizontal_scroll_widget_for_recently_viewed.dart';
+import 'ViewWidgets/widgets/simple_navigation_widget.dart';
 
 class MyFridge extends StatelessWidget {
   const MyFridge({super.key});

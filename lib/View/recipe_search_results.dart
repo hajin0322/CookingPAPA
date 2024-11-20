@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:group_project/base/res/media.dart';
-import '../base/res/styles/app_styles.dart';
+import 'ViewAsset/media.dart';
+import 'ViewAsset/styles/app_styles.dart';
 import 'detail_recipe.dart';
 
 class RecipeSearchResults extends StatefulWidget {
