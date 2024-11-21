@@ -1,4 +1,4 @@
-import '../model/ingredient.dart';
+import '../Model/ingredient.dart';
 
 class IngredientRepository {
   // 미리 정의된 재료 리스트

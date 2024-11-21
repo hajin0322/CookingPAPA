@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:group_project/model/ingredient_list.dart';
-import '../model/ingredient.dart';
+import '../Model/ingredient.dart';
 
 class IngredientListViewModel with ChangeNotifier{
   final IngredientList ingredientList;
