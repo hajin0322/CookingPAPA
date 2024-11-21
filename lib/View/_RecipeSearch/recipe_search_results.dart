@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:group_project/View/ViewBase/app_bar.dart';
+import 'package:group_project/View/_DetailRecipe/recipe_section.dart';
 import '../ViewAsset/media.dart';
 import '../ViewAsset/styles/app_styles.dart';
 import '../_DetailRecipe/detail_recipe.dart';
@@ -10,37 +12,76 @@ class RecipeSearchResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    String resultText = result.join(', ');
-
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Search Results"),
-        backgroundColor: AppStyles.bgColor,
+      appBar: const CustomAppBar(title: "Search Results"),
+      body: Container(
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 40, right: 40),
+              child: Text("[Selected Ingredients]",
+                  style: AppStyles.headLineStyle2
+                      .copyWith(color: AppStyles.textColor)),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 40, right: 40, bottom: 40),
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: result.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Text(result[index],
+                        style: AppStyles.headLineStyle3
+                            .copyWith(color: AppStyles.textColor));
+                  }),
+            ),
+            RecipeSection(
+                title: "Kimchi Soup",
+                imagePath: AppMedia.recipe1,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DetailRecipe()));
+                },
+                ico: AppMedia.ai_icon),
+            RecipeSection(
+                title: "Tofu Kimchi",
+                imagePath: AppMedia.recipe2,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DetailRecipe()));
+                },
+                ico: AppMedia.ai_icon),
+            RecipeSection(
+                title: "Tofu Kimchi",
+                imagePath: AppMedia.recipe2,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DetailRecipe()));
+                },
+                ico: AppMedia.ai_icon)
+            /*RecipeCard(
+              imagePath: AppMedia.recipe1,
+              recipeName: "Kimchi Soup(김치찌개)",
+            ),
+            const SizedBox(height: 20),
+            RecipeCard(
+              imagePath: AppMedia.recipe2,
+              recipeName: "Tofu Kimchi(두부김치)",
+            ),*/
+          ],
+        ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(20),
-        children: [
-          Text(
-            "Selected Ingredients: $resultText",
-            style: AppStyles.headLineStyle3,
-          ),
-          const SizedBox(height: 20),
-          RecipeCard(
-            imagePath: AppMedia.recipe1,
-            recipeName: "Kimchi Soup(김치찌개)",
-          ),
-          const SizedBox(height: 20),
-          RecipeCard(
-            imagePath: AppMedia.recipe2,
-            recipeName: "Tofu Kimchi(두부김치)",
-          ),
-        ],
-      ),
+      backgroundColor: AppStyles.bgColor,
     );
   }
 }
-
+/*
 class RecipeCard extends StatelessWidget {
   final String imagePath;
   final String recipeName;
@@ -96,3 +137,4 @@ class RecipeCard extends StatelessWidget {
     );
   }
 }
+*/
