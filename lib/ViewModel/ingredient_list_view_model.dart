@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
-import 'package:group_project/model/ingredient_list.dart';
+import 'package:group_project/Model/ingredient_list.dart';
 import '../Model/ingredient.dart';
 
-class IngredientListViewModel with ChangeNotifier{
+class IngredientListViewModel with ChangeNotifier {
   final IngredientList ingredientList;
 
   // 생성자에서 IngredientList를 주입받음
   IngredientListViewModel(this.ingredientList);
 
-
   // 사용된 재료 추가 (이런거 다 결국 메모리 주소로 찾아서 하는거라 현 상황에서는 안정성 괜찮음..어차피 다 기기에서만 돌릴거라)
   void addUsedIngredient(Ingredient ingredient) {
     ingredientList.usedIngredientList.add(ingredient);
+    notifyListeners();
   }
 
   // 선택된 재료를 리스트에 추가
@@ -33,12 +33,18 @@ class IngredientListViewModel with ChangeNotifier{
   // 삼항연산자 안에 또 삼항연산자 가능한가?
   // onPressed() : {selectionChange(ingredient)?? (ingredient.isSelected?? icon.checkedbox : icon.notcheckedbox) : snackbar 표시}
   bool selectionChange(Ingredient ingredient) {
-    if(ingredient.isSelected) {
+    if (ingredient.isSelected) {
       ingredient.isSelected = false;
-      ingredientList.selectedIngredientList.removeWhere((item) => item.name == ingredient.name);
+      ingredientList.selectedIngredientList
+          .removeWhere((item) => item.name == ingredient.name);
+      notifyListeners(); // 추가
       return true;
-    }else {
-      return addToSelectedList(ingredient);
+    } else {
+      final success = addToSelectedList(ingredient);
+      if (success) {
+        notifyListeners(); // 추가
+      }
+      return success;
     }
   }
 
@@ -56,5 +62,4 @@ class IngredientListViewModel with ChangeNotifier{
   void resetUsedList() {
     ingredientList.usedIngredientList.clear(); // 세트 초기화
   }
-
 }
