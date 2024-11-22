@@ -17,9 +17,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       super.key,
       required this.title,
       this.height = 100,
-      this.titleLeftPadding = 40.0,
+      this.titleLeftPadding = 24,
       this.logoAssetPath = AppMedia.logo,
-      this.logoSize = 100, // 기본 로고 크기를 60으로 설정
+      this.logoSize = 60, // 기본 로고 크기를 60으로 설정
       this.showBackButton = false});
 
   @override
@@ -35,15 +35,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               icon: const Icon(FluentSystemIcons.ic_fluent_arrow_left_filled))
           : null,
       title: Padding(
-        padding: EdgeInsets.only(left: showBackButton? 0 : (titleLeftPadding - 17.0)),
+        padding: EdgeInsets.only(left: showBackButton? 0 : titleLeftPadding),
         child: Text(title, style: AppStyles.headLineStyle2),
       ),
       backgroundColor: AppStyles.bgColor,
+      surfaceTintColor: AppStyles.layoutColor,
       elevation: 0,
       centerTitle: false,
       actions: [
         Padding(
-          padding: const EdgeInsets.only(right: 4.0),
+          padding: const EdgeInsets.only(right: 24.0),
           child: Image.asset(
             logoAssetPath,
             height: logoSize, // 동적 로고 크기 적용
