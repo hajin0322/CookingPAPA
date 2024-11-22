@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 class RecipeSearchAI {
   Future<List<Map<String, String>>> generateCookingIdeas(String ingredients) async {
     final llamaApiKey = dotenv.env['llama3ApiKey'];
-    final url = 'https://api.groq.com/openai/v1/chat/completions';
+    print("apikey is $llamaApiKey");
+    const url = 'https://api.groq.com/openai/v1/chat/completions';
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $llamaApiKey',

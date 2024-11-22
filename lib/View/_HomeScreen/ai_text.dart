@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:async'; // Timer를 사용하기 위해 추가
 import 'dart:convert'; // JSON 파싱을 위해 추가
 import 'package:http/http.dart' as http; // HTTP 요청을 위해 추가
@@ -29,7 +30,7 @@ class _AITextState extends State<AIText> {
   Timer? _timer;
 
   /// Groq API 키, 깃에 올리지 마세요!? 큰일 납니다? 기본 세팅 -> INS API KEY!
-  final String apiKey = 'INS API KEY!'; // 조심하자?
+  final apiKey = dotenv.env['llama3ApiKey'];
 
   @override
   void initState() {
