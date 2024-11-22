@@ -39,7 +39,7 @@ class _MyFridgeBodyState extends State<MyFridgeBody> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const DetailRecipe()));
+                      builder: (context) => const DetailRecipe(dishName: '', recipe: '', imagePrompt: '',)));
             }),
         RecipeSection(
             title: "Saved Recipes 2",
@@ -49,7 +49,7 @@ class _MyFridgeBodyState extends State<MyFridgeBody> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const DetailRecipe()));
+                      builder: (context) => const DetailRecipe(dishName: '', recipe: '', imagePrompt: '',)));
             }),
         RecipeSection(
             title: "Saved Recipes 3",
@@ -59,12 +59,12 @@ class _MyFridgeBodyState extends State<MyFridgeBody> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const DetailRecipe()));
+                      builder: (context) => const DetailRecipe(dishName: '', recipe: '', imagePrompt: '')));
             }),
       ])
     ]);
 
-      /*Column(
+    /*Column(
       children: [
         SimpleNavigationBar(
           title: 'Saved Recipes',
