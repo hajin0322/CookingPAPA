@@ -23,24 +23,32 @@ class RecipeSearchResults extends StatelessWidget {
       appBar: const CustomAppBar(title: "Search Results", showBackButton: true),
       body: ListView(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 40, right: 40),
-            child: Text("Result for: ",
-                style: AppStyles.headLineStyle2
-                    .copyWith(color: AppStyles.textColor)),
+          Container(
+
+            padding: const EdgeInsets.only(left: 40, right: 40, bottom: 20, top: 10),
+            decoration: BoxDecoration(
+              color: AppStyles.layoutColor,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Result for: ",
+                    style: AppStyles.headLineStyle2
+                        .copyWith(color: AppStyles.textColor)),
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: result.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Text(result[index],
+                          style: AppStyles.textStyle
+                              .copyWith(color: AppStyles.textColor));
+                    }),
+              ],
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 40, right: 40, bottom: 40),
-            child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: result.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Text(result[index],
-                      style: AppStyles.textStyle
-                          .copyWith(color: AppStyles.textColor));
-                }),
-          ),
+          const SizedBox(height: 25),
           RecipeSection(
               title: "Kimchi Soup",
               imagePath: AppMedia.recipe1,
