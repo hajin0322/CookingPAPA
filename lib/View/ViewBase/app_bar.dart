@@ -1,3 +1,4 @@
+import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import '../ViewAsset/media.dart';
 import '../ViewAsset/styles/app_styles.dart';
@@ -8,24 +9,33 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double titleLeftPadding;
   final String logoAssetPath;
   final double logoSize;
+  final bool showBackButton;
 
-  const CustomAppBar({
-    // 커스텀 앱 바 생성자
-    super.key,
-    required this.title,
-    this.height = 100,
-    this.titleLeftPadding = 40.0,
-    this.logoAssetPath = AppMedia.logo,
-    this.logoSize = 100, // 기본 로고 크기를 60으로 설정
-  });
+  const CustomAppBar(
+      {
+      // 커스텀 앱 바 생성자
+      super.key,
+      required this.title,
+      this.height = 100,
+      this.titleLeftPadding = 40.0,
+      this.logoAssetPath = AppMedia.logo,
+      this.logoSize = 100, // 기본 로고 크기를 60으로 설정
+      this.showBackButton = false});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
       toolbarHeight: height,
+      leading: showBackButton
+          ? IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(FluentSystemIcons.ic_fluent_arrow_left_filled))
+          : null,
       title: Padding(
-        padding: EdgeInsets.only(left: (titleLeftPadding - 17.0)),
+        padding: EdgeInsets.only(left: showBackButton? 0 : (titleLeftPadding - 17.0)),
         child: Text(title, style: AppStyles.headLineStyle2),
       ),
       backgroundColor: AppStyles.bgColor,

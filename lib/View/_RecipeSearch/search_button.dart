@@ -9,32 +9,36 @@ class SearchButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
-        final ingredientListViewModel =
-        context.read<IngredientListViewModel>();
-        final selectedIngredients =
-            ingredientListViewModel.ingredientList.selectedIngredientList;
+    return FloatingActionButton.extended(
 
-        if (selectedIngredients.isNotEmpty) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => RecipeSearchResults(
-                result: selectedIngredients.map((e) => e.name).toList(),
+        onPressed: () {
+          final ingredientListViewModel =
+          context.read<IngredientListViewModel>();
+          final selectedIngredients =
+              ingredientListViewModel.ingredientList.selectedIngredientList;
+
+          if (selectedIngredients.isNotEmpty) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    RecipeSearchResults(
+                      result: selectedIngredients.map((e) => e.name).toList(),
+                    ),
               ),
-            ),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Please select at least one ingredient'),
-            ),
-          );
-        }
-      },
-      backgroundColor: AppStyles.bgColor,
-      child: const Icon(Icons.search),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Please select at least one ingredient'),
+              ),
+            );
+          }
+        },
+        backgroundColor: AppStyles.bgColor,
+        label: Text("Start Cooking", style: AppStyles.headLineStyle3),
+        icon: const Icon(Icons.search),
+
     );
   }
 }
