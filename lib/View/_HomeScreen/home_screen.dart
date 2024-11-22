@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreenState> {
           ico: AppMedia.ai_icon,
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const DetailRecipe()));
+                MaterialPageRoute(builder: (context) => const DetailRecipe(dishName: '', recipe: '', imagePrompt: '')));
           },
           additionalInfo: 'Ingredients: 사용한 재료 목록\nPreparation Time: 요리 예상 시간 OR 간단한 설명같은거 넣으면 될듯',
         ),
