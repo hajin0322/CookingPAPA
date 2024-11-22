@@ -15,9 +15,15 @@ class TitlePadding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 40, top: 10, bottom: 10),
-      child: Text(
-        title,
-        style: textStyle ?? AppStyles.headLineStyle2,
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width-120, // 80(right) + 40(left)
+        child: Text(
+          title,
+          style: textStyle ?? AppStyles.headLineStyle2,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          softWrap: true,
+        ),
       ),
     );
   }
@@ -86,7 +92,7 @@ class RecipeSection extends StatelessWidget {
               TitlePadding(title: title),
               Expanded(child: Container()),
               Padding(
-                padding: const EdgeInsets.only(left: 40, right: 40),
+                padding: const EdgeInsets.only(left: 10, right: 40),
                 child: Image.asset(
                   ico,
                   width: 28,

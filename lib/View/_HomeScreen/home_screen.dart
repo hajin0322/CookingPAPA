@@ -22,16 +22,13 @@ class HomeScreen extends StatelessWidget {
 }
 
 class HomeScreenState extends StatefulWidget {
-  const HomeScreenState({super.key}); // 홈 화면의 상태를 관리하는 위젯입니다.
+  const HomeScreenState({super.key});
 
   @override
-  State<HomeScreenState> createState() => _HomeScreenState(); // 상태 관리 클래스 생성
+  State<HomeScreenState> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreenState> {
-  // AIText 위젯에 전달할 텍스트를 저장하는 상태 변수, 이건 나중에 좀 손 볼 예정
-  String aiTextGivenText = "Hello World! I'm Cooking PAPA! I want to make recipe for you! Come On BBOY";
-
   @override
   void initState() {
     super.initState();
@@ -45,9 +42,7 @@ class _HomeScreenState extends State<HomeScreenState> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // AIText 위젯에 동적인 텍스트를 전달합니다.
-            AIText(
-              givenText: aiTextGivenText,
-            ),
+            const AIText(),
             RecipeSection(
               title: "Recommended for you",
               imagePath: AppMedia.food1,

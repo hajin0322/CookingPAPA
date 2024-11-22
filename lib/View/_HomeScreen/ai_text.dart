@@ -8,9 +8,8 @@ import '../ViewAsset/styles/app_styles.dart';
 
 class AIText extends StatefulWidget {
   /// 화면에 타이핑 애니메이션으로 보여줄 텍스트
-  final String givenText;
 
-  const AIText({super.key, required this.givenText});
+  const AIText({super.key});
 
   @override
   State<AIText> createState() => _AITextState();
@@ -107,7 +106,7 @@ Response with roleplay as Cooking Papa. Don't make it too long.
   /// 주기적인 타이머를 사용하여 타이핑 애니메이션을 시작
   void startTypingAnimation() {
     // 일정 간격으로 displayedText를 업데이트하는 타이머를 생성합니다.
-    _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 20), (timer) {
       if (currentIndex < targetText.length) {
         setState(() {
           // 한 글자씩 displayedText에 추가합니다.
