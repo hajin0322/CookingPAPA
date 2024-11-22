@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreenState> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const DetailRecipe()),
+                  MaterialPageRoute(builder: (context) => const DetailRecipe(dishName: '', recipe: '', imagePrompt: '')),
                 );
               },
               additionalInfo: '재료: 사용한 재료 목록\n준비 시간: 요리 예상 시간 또는 간단한 설명을 추가하세요.',
