@@ -58,6 +58,7 @@ class RecipeSearchResults extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => const DetailRecipe()));
               },
+              additionalInfo: 'Ingredients: 사용한 재료 목록\nPreparation Time: 요리 예상 시간 OR 간단한 설명같은거 넣으면 될듯',
               ico: getRandomIcon()),
           RecipeSection(
               title: "Tofu Kimchi",
@@ -68,6 +69,7 @@ class RecipeSearchResults extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => const DetailRecipe()));
               },
+              additionalInfo: 'Ingredients: 사용한 재료 목록\nPreparation Time: 요리 예상 시간 OR 간단한 설명같은거 넣으면 될듯',
               ico: getRandomIcon()),
           RecipeSection(
               title: "Tofu Kimchi",
@@ -78,6 +80,7 @@ class RecipeSearchResults extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => const DetailRecipe()));
               },
+              additionalInfo: 'Ingredients: 사용한 재료 목록\nPreparation Time: 요리 예상 시간 OR 간단한 설명같은거 넣으면 될듯',
               ico: getRandomIcon())
         ],
       ),

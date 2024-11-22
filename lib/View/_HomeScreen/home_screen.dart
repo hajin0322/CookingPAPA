@@ -37,15 +37,15 @@ class _HomeScreenState extends State<HomeScreenState> {
           givenText: 'Hello!',
         ),
         RecipeSection(
-            title: "Recommended For You",
-            imagePath: AppMedia.food1,
-            ico: AppMedia.ai_icon,
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DetailRecipe()));
-            }),
+          title: "Recommended For You",
+          imagePath: AppMedia.food1,
+          ico: AppMedia.ai_icon,
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const DetailRecipe()));
+          },
+          additionalInfo: 'Ingredients: 사용한 재료 목록\nPreparation Time: 요리 예상 시간 OR 간단한 설명같은거 넣으면 될듯',
+        ),
       ])
     ]);
   }
