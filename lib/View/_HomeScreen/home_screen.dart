@@ -22,31 +22,47 @@ class HomeScreen extends StatelessWidget {
 }
 
 class HomeScreenState extends StatefulWidget {
-  const HomeScreenState({super.key}); // 홈 화면 상태 클래스 생성자
+  const HomeScreenState({super.key}); // 홈 화면의 상태를 관리하는 위젯입니다.
 
   @override
   State<HomeScreenState> createState() => _HomeScreenState(); // 상태 관리 클래스 생성
 }
 
 class _HomeScreenState extends State<HomeScreenState> {
+  // AIText 위젯에 전달할 텍스트를 저장하는 상태 변수, 이건 나중에 좀 손 볼 예정
+  String aiTextGivenText = "Hello World! I'm Cooking PAPA! I want to make recipe for you! Come On BBOY";
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const AIText(
-          givenText: 'Hello!',
+    return ListView(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // AIText 위젯에 동적인 텍스트를 전달합니다.
+            AIText(
+              givenText: aiTextGivenText,
+            ),
+            RecipeSection(
+              title: "Recommended for you",
+              imagePath: AppMedia.food1,
+              ico: AppMedia.ai_icon,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DetailRecipe()),
+                );
+              },
+              additionalInfo: '재료: 사용한 재료 목록\n준비 시간: 요리 예상 시간 또는 간단한 설명을 추가하세요.',
+            ),
+          ],
         ),
-        RecipeSection(
-          title: "Recommended For You",
-          imagePath: AppMedia.food1,
-          ico: AppMedia.ai_icon,
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const DetailRecipe()));
-          },
-          additionalInfo: 'Ingredients: 사용한 재료 목록\nPreparation Time: 요리 예상 시간 OR 간단한 설명같은거 넣으면 될듯',
-        ),
-      ])
-    ]);
+      ],
+    );
   }
 }
