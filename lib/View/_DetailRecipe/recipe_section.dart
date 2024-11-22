@@ -73,7 +73,8 @@ class RecipeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final aspectRatio = MediaQuery.of(context).size.aspectRatio;
-    final isTablet = MediaQuery.of(context).size.shortestSide >= 600 && aspectRatio < 1.6; // 테블릿 기준 너비 설정
+    final isTablet = MediaQuery.of(context).size.shortestSide >= 600 &&
+        aspectRatio < 1.6; // 테블릿 기준 너비 설정
     print(isTablet);
 
     return Column(
