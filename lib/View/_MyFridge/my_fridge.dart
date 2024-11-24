@@ -1,85 +1,35 @@
 import 'package:flutter/material.dart';
-import '../ViewAsset/media.dart';
-import '../ViewAsset/styles/app_styles.dart';
-import '../ViewBase/app_bar.dart';
+import 'package:provider/provider.dart';
+import '../../ViewModel/recipe_view_model.dart';
 import '../_DetailRecipe/detail_recipe.dart';
 import '../_DetailRecipe/recipe_section.dart';
 
 class MyFridge extends StatelessWidget {
-  const MyFridge({super.key});
+  const MyFridge({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final starredRecipes = context.watch<RecipeListViewModel>().getStarredRecipes();
+
     return Scaffold(
-      appBar: const CustomAppBar(title: "My Fridge"),
-      body: const MyFridgeBody(),
-      backgroundColor: AppStyles.bgColor,
+      appBar: AppBar(title: const Text("My Fridge")),
+      body: ListView.builder(
+        itemCount: starredRecipes.length,
+        itemBuilder: (context, index) {
+          final recipe = starredRecipes[index];
+          return RecipeSection(
+            recipe: recipe,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailRecipe(recipe: recipe),
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
-  }
-}
-
-class MyFridgeBody extends StatefulWidget {
-  const MyFridgeBody({super.key});
-
-  @override
-  State<StatefulWidget> createState() => _MyFridgeBodyState();
-}
-
-class _MyFridgeBodyState extends State<MyFridgeBody> {
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(children: [
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        RecipeSection(
-            title: "Saved Recipes 1",
-            imagePath: AppMedia.food2,
-            ico: AppMedia.save_icon,
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DetailRecipe(dishName: '', recipe: '', imagePrompt: '',)));
-            }),
-        RecipeSection(
-            title: "Saved Recipes 2",
-            imagePath: AppMedia.food2,
-            ico: AppMedia.save_icon,
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DetailRecipe(dishName: '', recipe: '', imagePrompt: '',)));
-            }),
-        RecipeSection(
-            title: "Saved Recipes 3",
-            imagePath: AppMedia.food2,
-            ico: AppMedia.save_icon,
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DetailRecipe(dishName: '', recipe: '', imagePrompt: '')));
-            }),
-      ])
-    ]);
-
-    /*Column(
-      children: [
-        SimpleNavigationBar(
-          title: 'Saved Recipes',
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const SavedRecipe(),
-              ), // 최근 5개 페이지로 이동하는 로직
-            );
-          },
-          topPaddingValue: 50,
-        ),
-        const RecViewWidget(),
-      ],
-    );*/
   }
 }
