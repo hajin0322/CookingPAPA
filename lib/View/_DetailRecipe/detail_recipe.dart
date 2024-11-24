@@ -1,67 +1,57 @@
 import 'package:flutter/material.dart';
-import 'package:group_project/View/ViewBase/app_bar.dart';
-import '../ViewAsset/styles/app_styles.dart';
+import 'package:provider/provider.dart';
+import '../../Model/recipe.dart';
+import '../../ViewModel/recipe_view_model.dart';
 
 class DetailRecipe extends StatelessWidget {
-  final String dishName;
-  final String recipe;
-  final String imagePrompt;
+  final Recipe recipe;
 
   const DetailRecipe({
-    super.key,
-    required this.dishName,
+    Key? key,
     required this.recipe,
-    required this.imagePrompt,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final recipeListViewModel = context.watch<RecipeListViewModel>();
+
     return Scaffold(
-        appBar: CustomAppBar(
-          title: dishName,
-          showBackButton: true,
+      appBar: AppBar(
+        title: Text(recipe.recipeTitle),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              recipeListViewModel.changeStarred(recipe); // 상태 변경
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                recipe.isStarred ? Icons.star : Icons.star_border,
+                color: recipe.isStarred ? Colors.yellow : Colors.grey, // 색상 변경
+                size: 36,
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image(
+              image: recipe.recipeImage,
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
+            const SizedBox(height: 16.0),
+            Text(
+              recipe.recipeContent,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ],
         ),
-        body: DetailRecipeState(
-          dishName: dishName,
-          recipe: recipe,
-          imagePrompt: imagePrompt,
-        ));
-  }
-}
-
-class DetailRecipeState extends StatefulWidget {
-  final String dishName;
-  final String recipe;
-  final String imagePrompt;
-
-  const DetailRecipeState(
-      {super.key,
-      required this.dishName,
-      required this.recipe,
-      required this.imagePrompt});
-
-  @override
-  State<DetailRecipeState> createState() => _DetailRecipeStateState();
-}
-
-class _DetailRecipeStateState extends State<DetailRecipeState> {
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 40.0),
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Recipe:", style: AppStyles.headLineStyle2),
-              const SizedBox(height: 8),
-              Text(widget.recipe, style: AppStyles.headLineStyle3),
-              const SizedBox(height: 16),
-              Text("Image Prompt:", style: AppStyles.headLineStyle2),
-              const SizedBox(height: 8),
-              Text(widget.imagePrompt, style: AppStyles.textStyle),
-            ],
-          )
-        ]);
+      ),
+    );
   }
 }
