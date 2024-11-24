@@ -62,4 +62,15 @@ class IngredientListViewModel with ChangeNotifier {
   void resetUsedList() {
     ingredientList.usedIngredientList.clear(); // 세트 초기화
   }
+
+  // 카테고리 가져오기
+  List<String> get categories => ingredientList.categories;
+
+// 카테고리별 재료 가져오기
+  List<Ingredient> getIngredientsByCategory(String category) {
+    return ingredientList.ingredientList
+        .where((ingredient) => ingredient.category == category)
+        .toList();
+  }
+
 }
