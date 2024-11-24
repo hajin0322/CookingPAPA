@@ -1,5 +1,9 @@
+import 'dart:async';
+import 'dart:typed_data'; // 명시적으로 import
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+import '../../Model/recipe.dart';
 import '../ViewAsset/media.dart';
 import '../ViewAsset/styles/app_styles.dart';
 import 'ai_text.dart';
@@ -7,7 +11,6 @@ import '../ViewBase/app_bar.dart';
 import '../_DetailRecipe/recipe_section.dart';
 import '../_DetailRecipe/detail_recipe.dart';
 
-// 홈 화면 클래스
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -29,9 +32,41 @@ class HomeScreenState extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreenState> {
+  Uint8List? imageData;
+  ImageProvider? recipeImage; // ImageProvider 타입의 이미지 저장
+  Recipe? recommendedRecipe;
+
   @override
   void initState() {
     super.initState();
+    _loadLocalImage();
+  }
+
+  /// 로컬 이미지 데이터를 로드하고 `MemoryImage`로 변환
+  Future<void> _loadLocalImage() async {
+    try {
+      final data = await rootBundle.load(AppMedia.food1); // 이미지 로드
+      imageData = data.buffer.asUint8List();
+
+      setState(() {
+        recipeImage = MemoryImage(imageData!); // MemoryImage로 변환
+        recommendedRecipe = Recipe(
+          recipeTitle: "Delicious Pasta",
+          recipeImage: recipeImage!,
+          recipeContent: """
+Ingredients:
+- Pasta
+- Sauce
+
+Instructions:
+1. Cook pasta.
+2. Add sauce.
+""",
+        );
+      });
+    } catch (e) {
+      print("Error loading local image: $e");
+    }
   }
 
   @override
@@ -41,20 +76,23 @@ class _HomeScreenState extends State<HomeScreenState> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // AIText 위젯에 동적인 텍스트를 전달합니다.
-            const AIText(),
-            RecipeSection(
-              title: "Recommended for you",
-              imagePath: AppMedia.food1,
-              ico: AppMedia.ai_icon,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const DetailRecipe(dishName: '', recipe: '', imagePrompt: '')),
-                );
-              },
-              additionalInfo: '재료: 사용한 재료 목록\n준비 시간: 요리 예상 시간 또는 간단한 설명을 추가하세요.',
+            const AIText(
+              givenText: 'Hello!',
             ),
+            if (recommendedRecipe != null)
+              RecipeSection(
+                recipe: recommendedRecipe!,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailRecipe(recipe: recommendedRecipe!),
+                    ),
+                  );
+                },
+              )
+            else
+              const Center(child: CircularProgressIndicator()),
           ],
         ),
       ],
