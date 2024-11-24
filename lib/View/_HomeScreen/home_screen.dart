@@ -76,9 +76,6 @@ Instructions:
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const AIText(
-              givenText: 'Hello!',
-            ),
             if (recommendedRecipe != null)
               RecipeSection(
                 recipe: recommendedRecipe!,
