@@ -6,15 +6,15 @@ import 'recipe_search_results.dart';
 import 'recipe_search_ai.dart';
 
 class SearchButton extends StatelessWidget {
-  const SearchButton({super.key});
+  const SearchButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
       onPressed: () async {
-        final ingredientListViewModel = context.read<IngredientListViewModel>();
+        final ingredientViewModel = context.read<IngredientListViewModel>();
         final selectedIngredients =
-            ingredientListViewModel.ingredientList.selectedIngredientList;
+            ingredientViewModel.ingredientList.selectedIngredientList;
 
         if (selectedIngredients.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -25,12 +25,13 @@ class SearchButton extends StatelessWidget {
 
         try {
           final recipeAI = RecipeSearchAI();
-          final combinedIngredients = selectedIngredients.map((e) => e.name).join(', ');
+          final combinedIngredients =
+          selectedIngredients.map((e) => e.name).join(', ');
 
-          // AI에서 요리 생성
+          // Generate recipes using AI
           final recipes = await recipeAI.generateCookingIdeas(combinedIngredients);
 
-          // 결과 화면으로 이동
+          // Navigate to results screen
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -38,7 +39,6 @@ class SearchButton extends StatelessWidget {
             ),
           );
         } catch (e) {
-          print("Error during AI API call: $e");
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Failed to generate recipes: $e')),
           );
