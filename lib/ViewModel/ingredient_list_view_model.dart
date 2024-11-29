@@ -72,5 +72,4 @@ class IngredientListViewModel with ChangeNotifier {
         .where((ingredient) => ingredient.category == category)
         .toList();
   }
-
 }

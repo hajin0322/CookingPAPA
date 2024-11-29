@@ -24,7 +24,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => RecipeListViewModel()), // RecipeListViewModel 추가
       ],
       child: const MyApp(),
-    ),
+    )
   );
 }
 

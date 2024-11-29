@@ -48,6 +48,7 @@ class _BottomNavBarState extends State<BottomNavBar>
           controller: _tabController,
           labelStyle:
               const TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
+          indicatorColor: AppStyles.textColor,
           labelColor: AppStyles.textColor,
           tabs: const [
             Tab(

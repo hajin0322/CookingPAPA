@@ -6,10 +6,10 @@ class RecipeSection extends StatelessWidget {
   final VoidCallback onTap;
 
   const RecipeSection({
-    Key? key,
+    super.key,
     required this.recipe,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

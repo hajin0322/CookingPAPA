@@ -11,7 +11,7 @@ import 'package:group_project/Model/recipe.dart'; // Recipe 모델
 class RecipeSearchAI {
   Future<List<Recipe>> generateCookingIdeas(String ingredients) async {
     final llamaApiKey = dotenv.env['llama3ApiKey'];
-    final url = 'https://api.groq.com/openai/v1/chat/completions';
+    const url = 'https://api.groq.com/openai/v1/chat/completions';
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $llamaApiKey',
