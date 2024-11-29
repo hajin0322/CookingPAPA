@@ -4,6 +4,7 @@ import 'package:group_project/Repository/fileIO.dart';
 import '../Model/ingredient.dart';
 
 class IngredientListViewModel with ChangeNotifier {
+  final fileIO = FileIO();
   final IngredientList ingredientList;
 
   // 생성자에서 초기화 제거
@@ -11,7 +12,6 @@ class IngredientListViewModel with ChangeNotifier {
 
   // 파일에서 사용된 재료를 로드하여 큐 초기화
   Future<void> initializeUsedIngredients() async {
-    final fileIO = FileIO();
     final loadedQueue = await fileIO.loadUsedIngredients();
     ingredientList.usedIngredientQueue = loadedQueue;
     notifyListeners();
@@ -19,7 +19,6 @@ class IngredientListViewModel with ChangeNotifier {
 
   // 사용된 재료 추가
   void addUsedIngredient(List<Ingredient> selectedIngredient) async {
-    final fileIO = FileIO();
     
     // 기존 큐에 새로운 재료들 추가
     for (int i = 0; i < selectedIngredient.length; i++) {
@@ -83,8 +82,10 @@ class IngredientListViewModel with ChangeNotifier {
   }
 
   // 썻었던 ingredient 기록 초기화
-  void resetUsedList() {
-    ingredientList.usedIngredientQueue.clear(); // 세트 초기화
+  Future<void> resetUsedList() async {
+    ingredientList.usedIngredientQueue.clear();
+    await fileIO.saveUsedIngredients(ingredientList.usedIngredientQueue);
+
   }
 
   // 카테고리 가져오기

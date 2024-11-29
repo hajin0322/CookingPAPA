@@ -5,6 +5,7 @@ import '../Model/recipe.dart';
 class RecipeListViewModel with ChangeNotifier {
   
   List<Recipe> starredList = []; // 즐겨찾기 목록 빈 리스트로 초기화
+  final fileIO = FileIO();
   
   RecipeListViewModel(List<Recipe> initialStarred) {
     starredList = initialStarred;
@@ -22,7 +23,7 @@ class RecipeListViewModel with ChangeNotifier {
     notifyListeners(); // 상태 변경 알림
     // 파일에서 찾아서 없앨 필요 조차 없음. starredList를 받아서 "덮어쓰면 되는거니까"
     // 항상 파일 자체는 덮어쓴다는 개념이 중요한것임!!!
-    FileIO().saveStarredRecipes(starredList);
+    fileIO.saveStarredRecipes(starredList);
   }
 
   List<Recipe> getStarredRecipes() {
@@ -40,5 +41,10 @@ class RecipeListViewModel with ChangeNotifier {
 
   bool getIsStarred(Recipe recipe) {
     return recipe.isStarred;
+  }
+
+  void resetStarredRecipes(){
+    starredList.clear();
+    fileIO.saveStarredRecipes(starredList);
   }
 }
