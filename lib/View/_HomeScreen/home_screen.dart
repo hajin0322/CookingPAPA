@@ -1,15 +1,10 @@
-import 'dart:async';
-import 'dart:typed_data'; // 명시적으로 import
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import '../../Model/recipe.dart';
-import '../ViewAsset/media.dart';
+import '../../ViewModel/data_source_view_model.dart';
 import '../ViewAsset/styles/app_styles.dart';
-import 'ai_text.dart';
 import '../ViewBase/app_bar.dart';
 import '../_DetailRecipe/recipe_section.dart';
-import '../_DetailRecipe/detail_recipe.dart';
+import '../_HomeScreen/recommend_button.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -18,81 +13,52 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "What are you Cooking Today?"),
-      body: const HomeScreenState(),
-      backgroundColor: AppStyles.bgColor,
-    );
-  }
-}
-
-class HomeScreenState extends StatefulWidget {
-  const HomeScreenState({super.key});
-
-  @override
-  State<HomeScreenState> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreenState> {
-  Uint8List? imageData;
-  ImageProvider? recipeImage; // ImageProvider 타입의 이미지 저장
-  Recipe? recommendedRecipe;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadLocalImage();
-  }
-
-  /// 로컬 이미지 데이터를 로드하고 `MemoryImage`로 변환
-  Future<void> _loadLocalImage() async {
-    try {
-      final data = await rootBundle.load(AppMedia.food1); // 이미지 로드
-      imageData = data.buffer.asUint8List();
-
-      setState(() {
-        recipeImage = MemoryImage(imageData!); // MemoryImage로 변환
-        recommendedRecipe = Recipe(
-          recipeTitle: "Delicious Pasta",
-          recipeImage: recipeImage!,
-          recipeContent: """
-Ingredients:
-- Pasta
-- Sauce
-
-Instructions:
-1. Cook pasta.
-2. Add sauce.
-""",
-        );
-      });
-    } catch (e) {
-      print("Error loading local image: $e");
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (recommendedRecipe != null)
-              RecipeSection(
-                recipe: recommendedRecipe!,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailRecipe(recipe: recommendedRecipe!),
-                    ),
+      body: Stack(
+        children: [
+          ListView(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Consumer<DataSourceViewModel>(
+                    builder: (context, viewModel, child) {
+                      return viewModel.recommendedRecipe != null
+                          ? RecipeSection(recipe: viewModel.recommendedRecipe!)
+                          : const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(16.0),
+                                child: Text(
+                                  'Press the Recommend button to get a recipe suggestion!',
+                                  style: TextStyle(fontSize: 30),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            );
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Positioned(
+            bottom: 16,
+            right: 16,
+            child: FloatingActionButton.extended(
+              onPressed: () async {
+                final recipe = await context.read<DataSourceViewModel>().generateRecipeFromUsedIngredients();
+                if (recipe == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Please active Recipe Search least 1 time!')),
                   );
-                },
-              )
-            else
-              const Center(child: CircularProgressIndicator()),
-          ],
-        ),
-      ],
+                }
+              },
+              backgroundColor: AppStyles.bgColor,
+              label: const RecommendButton(),
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: AppStyles.bgColor,
     );
   }
 }

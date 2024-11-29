@@ -76,11 +76,11 @@ class IngredientRepository {
     Ingredient(name:"cheese (치즈)",category:'Dairy (유제품)'),
 
     // 가공류
-    Ingredient(name:"spam",category:'Processed Food (가공식품)'),
-    Ingredient(name:"tuna",category:'Processed Food (가공식품)'),
-    Ingredient(name:"fish cake",category:'Processed Food (가공식품)'),
-    Ingredient(name:"crab stick",category:'Processed Food (가공식품)'),
-    Ingredient(name:"sausage",category:'Processed Food (가공식품)')
+    Ingredient(name:"spam(스팸)",category:'Processed Food (가공식품)'),
+    Ingredient(name:"tuna(참치캔)",category:'Processed Food (가공식품)'),
+    Ingredient(name:"fish cake(어묵)",category:'Processed Food (가공식품)'),
+    Ingredient(name:"crab stick(게맛살)",category:'Processed Food (가공식품)'),
+    Ingredient(name:"sausage(소시지)",category:'Processed Food (가공식품)')
   ];
 
   // 모든 재료 가져오기 => TypeListViewModel에서 수행

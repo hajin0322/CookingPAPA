@@ -1,16 +1,40 @@
 import 'package:flutter/cupertino.dart';
 import 'package:group_project/Model/ingredient_list.dart';
+import 'package:group_project/Repository/fileIO.dart';
 import '../Model/ingredient.dart';
 
 class IngredientListViewModel with ChangeNotifier {
   final IngredientList ingredientList;
 
-  // 생성자에서 IngredientList를 주입받음
+  // 생성자에서 초기화 제거
   IngredientListViewModel(this.ingredientList);
 
-  // 사용된 재료 추가 (이런거 다 결국 메모리 주소로 찾아서 하는거라 현 상황에서는 안정성 괜찮음..어차피 다 기기에서만 돌릴거라)
-  void addUsedIngredient(Ingredient ingredient) {
-    ingredientList.usedIngredientList.add(ingredient);
+  // 파일에서 사용된 재료를 로드하여 큐 초기화
+  Future<void> initializeUsedIngredients() async {
+    final fileIO = FileIO();
+    final loadedQueue = await fileIO.loadUsedIngredients();
+    ingredientList.usedIngredientQueue = loadedQueue;
+    notifyListeners();
+  }
+
+  // 사용된 재료 추가
+  void addUsedIngredient(List<Ingredient> selectedIngredient) async {
+    final fileIO = FileIO();
+    
+    // 기존 큐에 새로운 재료들 추가
+    for (int i = 0; i < selectedIngredient.length; i++) {
+      ingredientList.usedIngredientQueue.add(selectedIngredient[i]);
+    }
+
+    // 현재 큐의 내용 출력 (디버깅용)
+    print("\nUpdated Queue contents:");
+    for (var ingredient in ingredientList.usedIngredientQueue.items) {
+      print(ingredient.name);
+    }
+
+    // 업데이트된 큐를 파일에 저장
+    await fileIO.saveUsedIngredients(ingredientList.usedIngredientQueue);
+
     notifyListeners();
   }
 
@@ -60,12 +84,12 @@ class IngredientListViewModel with ChangeNotifier {
 
   // 썻었던 ingredient 기록 초기화
   void resetUsedList() {
-    ingredientList.usedIngredientList.clear(); // 세트 초기화
+    ingredientList.usedIngredientQueue.clear(); // 세트 초기화
   }
 
   // 카테고리 가져오기
   List<String> get categories => ingredientList.categories;
-
+  LimitedQueue<Ingredient> get usedIngredientQueue => ingredientList.usedIngredientQueue;
 // 카테고리별 재료 가져오기
   List<Ingredient> getIngredientsByCategory(String category) {
     return ingredientList.ingredientList

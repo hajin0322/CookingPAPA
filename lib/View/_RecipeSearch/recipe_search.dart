@@ -8,7 +8,7 @@ import 'package:group_project/Model/ingredient_list.dart';
 import '../ViewBase/app_bar.dart';
 
 class RecipeSearch extends StatefulWidget {
-  const RecipeSearch({Key? key}) : super(key: key);
+  const RecipeSearch({super.key});
 
   @override
   State<RecipeSearch> createState() => _RecipeSearchState();

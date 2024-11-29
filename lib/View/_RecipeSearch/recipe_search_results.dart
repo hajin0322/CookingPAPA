@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../Model/recipe.dart';
-import '../_DetailRecipe/detail_recipe.dart';
 import '../_DetailRecipe/recipe_section.dart';
 
 class RecipeSearchResults extends StatelessWidget {
   final List<Recipe> results;
 
-  const RecipeSearchResults({Key? key, required this.results}) : super(key: key);
+  const RecipeSearchResults({super.key, required this.results});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +17,6 @@ class RecipeSearchResults extends StatelessWidget {
           final recipe = results[index];
           return RecipeSection(
             recipe: recipe,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DetailRecipe(recipe: recipe),
-                ),
-              );
-            },
           );
         },
       ),

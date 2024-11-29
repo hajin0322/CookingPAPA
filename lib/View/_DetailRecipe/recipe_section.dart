@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
 import '../../Model/recipe.dart';
+import 'detail_recipe.dart';
+import 'dart:typed_data';
 
 class RecipeSection extends StatelessWidget {
   final Recipe recipe;
-  final VoidCallback onTap;
 
   const RecipeSection({
-    Key? key,
+    super.key,
     required this.recipe,
-    required this.onTap,
-  }) : super(key: key);
-
+  });
+  //여기서 이 onTap 콜백은 어디서 쓰이는것인지?
+  //아 레시피 섹션을 지금 위젯으로 만들어둬서 필요하다 이 말인거구나?
   @override
   Widget build(BuildContext context) {
     final bool isTablet = _isTablet(context);
 
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailRecipe(recipe: recipe),
+          ),
+        );
+      },
       child: Card(
         margin: const EdgeInsets.all(16),
         child: Padding(
@@ -59,17 +67,15 @@ class RecipeSection extends StatelessWidget {
 
   /// 이미지 위젯
   Widget _buildImage({int? flex, required double height}) {
+    // base64 문자열을 Uint8List로 디코딩
+    final Uint8List imageBytes = recipe.imageBytes; // Recipe 클래스의 getter 사용
+
     final imageWidget = ClipRRect(
       borderRadius: BorderRadius.circular(16),
-      child: Image(
-        image: recipe.recipeImage, // ImageProvider 사용
-        fit: BoxFit.cover,
-        width: double.infinity,
+      child: Image.memory(
+        imageBytes,
         height: height,
-        errorBuilder: (context, error, stackTrace) {
-          print("Error loading image: $error");
-          return const Placeholder(fallbackHeight: 150);
-        },
+        fit: BoxFit.cover,
       ),
     );
 
