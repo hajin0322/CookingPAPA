@@ -37,6 +37,20 @@ class DetailRecipe extends StatelessWidget {
 
     final Uint8List imageBytes = recipe.imageBytes;
 
+    List<String> recipes = recipe.recipeContent.split('\n');
+
+    Map<String, List<String>> indexedRecipes = {
+      'Description': [recipes[0]],
+      'Ingredients': recipes[1]
+          .replaceAll('[', '') // '[' 제거
+          .replaceAll('\\]', '') // ']' 제거
+          .split(r'\, '), // '\, ' 기준으로 분리
+      'Instructions': recipes[2]
+          .replaceAll('[', '') // '[' 제거
+          .replaceAll('\\]', '') // ']' 제거
+          .split(r'\, ') // '\, ' 기준으로 분리
+    };
+
     return Scaffold(
       appBar: CustomAppBar(
         title: recipeSnapshot['title'],
@@ -47,7 +61,9 @@ class DetailRecipe extends StatelessWidget {
               isStarred
                   ? FluentSystemIcons.ic_fluent_star_filled
                   : FluentSystemIcons.ic_fluent_star_regular, // 아이콘 결정
-              color: isStarred ? AppStyles.textColor : AppStyles.textColor, // 색상 결정
+              color: isStarred
+                  ? AppStyles.textColor
+                  : AppStyles.textColor, // 색상 결정
             ),
             onPressed: () {
               recipeListViewModel.changeStarred(recipe); // 상태 변경
@@ -60,19 +76,45 @@ class DetailRecipe extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.memory(imageBytes),
+            Image.memory(imageBytes), // 이미지를 표시
             const SizedBox(height: 16.0),
-            Column(
-              children: [
-                Text(
-                  recipe.recipeContent.split('\n').first,
-                  style: AppStyles.textStyle,
-                ),
-              ],
+            ListView.builder(
+              shrinkWrap: true, // 높이를 제한하여 Column과 호환
+              physics: const NeverScrollableScrollPhysics(), // 내부 스크롤 비활성화
+              itemCount: recipes.length, // 리스트의 길이
+              itemBuilder: (context, index) {
+                final entry = indexedRecipes.entries.toList()[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        entry.key,
+                        // Map의 키 (e.g., Description, Ingredients, Instructions)
+                        style: AppStyles.headLineStyle2,
+                        ),
+                      const SizedBox(height: 4.0),
+                      ListView.builder(
+                        shrinkWrap: true, // 높이를 제한하여 Column과 호환
+                        physics: const NeverScrollableScrollPhysics(), // 내부 스크롤 비활성화
+                        itemCount: entry.value.length, // 각 리스트의 길이
+                        itemBuilder: (context, subIndex) {
+                          return Text(
+                              entry.value[subIndex], // 리스트의 각 항목
+                              style: AppStyles.headLineStyle3,
+                            );
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
           ],
         ),
       ),
+      backgroundColor: AppStyles.bgColor,
     );
   }
 }

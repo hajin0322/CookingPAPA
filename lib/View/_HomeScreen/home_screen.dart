@@ -92,13 +92,20 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           content: Column(
                             mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              CircularProgressIndicator(color: AppStyles.textColor),
+                              CircularProgressIndicator(
+                                  color: AppStyles.textColor),
                               const SizedBox(height: 20),
                               Text(
-                                "PAPA is cooking recipes for you.\nDon't turn off this app!",
+                                "PAPA is cooking recipes for you.",
                                 style: AppStyles.textStyle,
                               ),
+                              Text(
+                                "DON'T TURN OFF THIS APP!",
+                                style: AppStyles.textStyle
+                                    .copyWith(color: AppStyles.textColor),
+                              )
                             ],
                           ),
                         ),

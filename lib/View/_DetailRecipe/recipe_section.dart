@@ -14,7 +14,6 @@ class RecipeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     final bool isTablet = _isTablet(context);
 
     return GestureDetector(
@@ -103,7 +102,7 @@ class RecipeSection extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          recipe.recipeContent.split('\n').first,
+          recipe.recipeContent,
           style: AppStyles.textStyle.copyWith(color: AppStyles.textColor),
           maxLines: 3,
           overflow: TextOverflow.ellipsis,

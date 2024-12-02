@@ -91,12 +91,10 @@ Respond **exactly** in the following format, including the labels and without an
 Dish Name: <dish name>
 Description: <brief description>
 Ingredients:
-<ingredient 1>
-<ingredient 2>
+<ingredient 1>/<ingredient 2>/...
 ...
 Instructions:
-<step 1>
-<step 2>
+<step 1>/<step 2>/...
 ...
 Image Prompt: <image prompt>
 """
@@ -160,11 +158,11 @@ Image Prompt: <image prompt>
         isInstructionsSection = false;
       } else if (isIngredientsSection) {
         if (line.trim().isNotEmpty) {
-          ingredients.add(line.trim());
+          ingredients.add("${line.trim()}\\");
         }
       } else if (isInstructionsSection) {
         if (line.trim().isNotEmpty) {
-          instructions.add(line.trim());
+          instructions.add("${line.trim()}\\");
         }
       }
     }
