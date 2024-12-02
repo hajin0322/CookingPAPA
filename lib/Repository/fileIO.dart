@@ -75,7 +75,7 @@ class FileIO {
 
       final contents = await file.readAsString();
       final List<dynamic> jsonData = jsonDecode(contents);
-      final limitedQueue = LimitedQueue<Ingredient>(10);
+      final limitedQueue = LimitedQueue<Ingredient>(5);
       final ingredients = jsonData.map((json) => Ingredient.fromJson(json)).toList();
       for (var ingredient in ingredients) {
         limitedQueue.add(ingredient);
