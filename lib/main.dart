@@ -38,7 +38,7 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => RecipeListViewModel(initialStarred)), // 수정된 부분
+        ChangeNotifierProvider(create: (_) => RecipeListViewModel(initialStarred)),
         ChangeNotifierProvider(create: (_) => DataSourceViewModel(DataSource(), IngredientListViewModel(IngredientList())))
       ],
       child: const MyApp(),

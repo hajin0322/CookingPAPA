@@ -85,7 +85,6 @@ class IngredientListViewModel with ChangeNotifier {
   Future<void> resetUsedList() async {
     ingredientList.usedIngredientQueue.clear();
     await fileIO.saveUsedIngredients(ingredientList.usedIngredientQueue);
-
   }
 
   // 카테고리 가져오기

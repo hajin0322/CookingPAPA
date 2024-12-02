@@ -15,6 +15,54 @@ class DataSourceViewModel with ChangeNotifier {
 
   DataSourceViewModel(this.dataSource, this.ingredientListViewModel);
 
+  Future<String> generateAIResponse(String content) async {
+    final llamaApiKey = dataSource.llama3ApiKey;
+    final url = dataSource.llama3ApiUrl;
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $llamaApiKey',
+    };
+    final body = jsonEncode({
+      'model': 'llama3-8b-8192',
+      'messages': [
+        {'role': 'user', 'content': content}
+      ],
+      'max_tokens': 80,
+    });
+
+    try {
+      // HTTP POST 요청
+      final response =
+          await http.post(Uri.parse(url), headers: headers, body: body);
+
+      if (response.statusCode == 200) {
+        // 성공적으로 응답을 받았을 경우
+        final responseData = jsonDecode(response.body); // JSON 파싱
+        final content =
+            responseData['choices'][0]['message']['content'] as String;
+
+        // 개행 문자 제거 및 단일 문자열로 정리
+        final cleanedContent =
+            content.replaceAll('\n\n', ' ').replaceAll('\n', ' ');
+
+        const maxLength = 220;
+        if (cleanedContent.length > maxLength) {
+          return '${cleanedContent.substring(0, maxLength)}...';
+        } else {
+          return cleanedContent;
+        }
+      } else {
+        // 실패한 경우 상태 코드와 함께 반환
+        print("Failed API call. Status code: ${response.statusCode}");
+        return "API Error: ${response.statusCode}";
+      }
+    } catch (e) {
+      // 예외 처리
+      print("Error during API call: $e");
+      return "AI Error";
+    }
+  }
+
   Future<String> generateCookingIdeas(String ingredients) async {
     final llamaApiKey = dataSource.llama3ApiKey;
     final url = dataSource.llama3ApiUrl;
@@ -22,7 +70,7 @@ class DataSourceViewModel with ChangeNotifier {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $llamaApiKey',
     };
-    
+
     final body = jsonEncode({
       'model': 'llama3-8b-8192',
       'messages': [
@@ -68,7 +116,6 @@ Image Prompt: <image prompt>
         print("Raw AI Response:\n$content");
 
         return content;
-        
       } else {
         print("API call failed : ${response.body}");
         return "AI Error";
@@ -134,7 +181,7 @@ Image Prompt: <image prompt>
 
     return {
       'dishName': dishName,
-      'description': description + '\n' + ingredients.toString() + '\n' + instructions.toString(),
+      'description': '$description\n$ingredients\n$instructions',
       'imagePrompt': imagePrompt,
     };
   }
@@ -170,22 +217,22 @@ Image Prompt: <image prompt>
     }
   }
 
-  Future<List<Recipe>> generateMultipleRecipes(String ingredients, int count) async {
+  Future<List<Recipe>> generateMultipleRecipes(
+      String ingredients, int count) async {
     List<Recipe> recipes = [];
     for (int i = 0; i < count; i++) {
       final response = await generateCookingIdeas(ingredients);
       final aiResult = _parseAIResponse(response);
       final aiImage = await generateImage(aiResult['imagePrompt']);
-      
+
       if (aiImage != null) {
         // Uint8List 이미지만 base64로 인코딩
         String base64Image = base64Encode(aiImage);
-        
+
         Recipe result = Recipe(
-          recipeTitle: aiResult['dishName'],
-          recipeImage: base64Image,  // base64로 인코딩된 이미지
-          recipeContent: aiResult['description']
-        );
+            recipeTitle: aiResult['dishName'],
+            recipeImage: base64Image, // base64로 인코딩된 이미지
+            recipeContent: aiResult['description']);
         recipes.add(result);
       } else {
         print('Failed to generate image for recipe ${aiResult['dishName']}');
@@ -200,7 +247,7 @@ Image Prompt: <image prompt>
     // FileIO에서 사용된 재료들 불러오기
     final fileIO = FileIO();
     final usedIngredientsQueue = await fileIO.loadUsedIngredients();
-    
+
     if (usedIngredientsQueue.length == 0) {
       print('No used ingredients found');
       return null;
@@ -210,7 +257,7 @@ Image Prompt: <image prompt>
     final usedIngredients = usedIngredientsQueue.items
         .map((ingredient) => ingredient.name)
         .join(', ');
-    
+
     print('Generating recipe from used ingredients: $usedIngredients');
 
     // 기존 함수 재사용

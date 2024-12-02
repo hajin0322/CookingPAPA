@@ -10,32 +10,67 @@ class SearchButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dataSourceViewModel = Provider.of<DataSourceViewModel>(context, listen: false);
+    final dataSourceViewModel =
+        Provider.of<DataSourceViewModel>(context, listen: false);
+
     return FloatingActionButton.extended(
       onPressed: () async {
         final ingredientViewModel = context.read<IngredientListViewModel>();
-        
+
         // 검색 시작 전에 사용된 재료 목록 초기화
         await ingredientViewModel.initializeUsedIngredients();
-        
+
         final selectedIngredients =
             ingredientViewModel.ingredientList.selectedIngredientList;
-        print(selectedIngredients);
 
         if (selectedIngredients.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Please select at least one ingredient')),
+            const SnackBar(
+                content: Text('Please select at least one ingredient')),
           );
           return;
         }
-        ingredientViewModel.addUsedIngredient(selectedIngredients);
+
 
         try {
           final combinedIngredients =
               selectedIngredients.map((e) => e.name).join(', ');
 
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return PopScope(
+                  canPop: false,
+                  child: AlertDialog(
+                    titlePadding: const EdgeInsets.all(20),
+                    title: Center(
+                      child: Text(
+                        "Wait a minute!",
+                        style: AppStyles.headLineStyle2
+                            .copyWith(color: AppStyles.textColor),
+                      ),
+                    ),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircularProgressIndicator(color: AppStyles.textColor),
+                        const SizedBox(height: 20),
+                        Text(
+                          "PAPA is cooking recipes for you.\nDon't turn off this app!",
+                          style: AppStyles.textStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              });
+
           // Generate recipes using AI
-          final recipes = await dataSourceViewModel.generateMultipleRecipes(combinedIngredients, 3);
+          final recipes = await dataSourceViewModel.generateMultipleRecipes(
+              combinedIngredients, 3);
+
+          Navigator.pop(context);
 
           // Navigate to results screen
           Navigator.push(
@@ -44,6 +79,7 @@ class SearchButton extends StatelessWidget {
               builder: (context) => RecipeSearchResults(results: recipes),
             ),
           );
+          ingredientViewModel.addUsedIngredient(selectedIngredients);
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Failed to generate recipes: $e')),

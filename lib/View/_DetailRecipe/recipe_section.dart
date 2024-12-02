@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:group_project/View/ViewAsset/styles/app_styles.dart';
 import '../../Model/recipe.dart';
 import 'detail_recipe.dart';
 import 'dart:typed_data';
@@ -10,10 +11,10 @@ class RecipeSection extends StatelessWidget {
     super.key,
     required this.recipe,
   });
-  //여기서 이 onTap 콜백은 어디서 쓰이는것인지?
-  //아 레시피 섹션을 지금 위젯으로 만들어둬서 필요하다 이 말인거구나?
+
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     final bool isTablet = _isTablet(context);
 
     return GestureDetector(
@@ -26,6 +27,11 @@ class RecipeSection extends StatelessWidget {
         );
       },
       child: Card(
+        color: AppStyles.layoutColor,
+        shadowColor: AppStyles.layoutColor,
+        elevation: 0.5,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        borderOnForeground: true,
         margin: const EdgeInsets.all(16),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -84,7 +90,6 @@ class RecipeSection extends StatelessWidget {
         : imageWidget;
   }
 
-
   /// 텍스트 콘텐츠 위젯
   Widget _buildTextContent() {
     return Column(
@@ -92,19 +97,14 @@ class RecipeSection extends StatelessWidget {
       children: [
         Text(
           recipe.recipeTitle,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppStyles.headLineStyle2,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(height: 8),
         Text(
           recipe.recipeContent.split('\n').first,
-          style: const TextStyle(
-            fontSize: 14,
-          ),
+          style: AppStyles.textStyle.copyWith(color: AppStyles.textColor),
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
         ),

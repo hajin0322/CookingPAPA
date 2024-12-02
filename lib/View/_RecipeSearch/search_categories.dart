@@ -4,7 +4,7 @@ import 'package:group_project/View/ViewAsset/styles/app_styles.dart';
 import 'package:group_project/ViewModel/ingredient_list_view_model.dart';
 
 class SearchCategories extends StatelessWidget {
-  const SearchCategories({Key? key}) : super(key: key);
+  const SearchCategories({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class SearchCategories extends StatelessWidget {
       itemBuilder: (context, index) {
         final category = categories[index];
         final ingredients =
-        ingredientListViewModel.getIngredientsByCategory(category);
+            ingredientListViewModel.getIngredientsByCategory(category);
 
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 23),
@@ -43,24 +43,31 @@ class SearchCategories extends StatelessWidget {
                   style: AppStyles.textStyle,
                 ),
                 trailing: Icon(
-                  isSelected
-                      ? Icons.check_box
-                      : Icons.check_box_outline_blank,
-                  color: isSelected ? Colors.green : Colors.grey,
+                  isSelected ? Icons.check_box : Icons.check_box_outline_blank,
+                  color: isSelected ? AppStyles.textColor : Colors.grey,
                 ),
                 onTap: () {
                   final success =
-                  ingredientListViewModel.selectionChange(ingredient);
+                      ingredientListViewModel.selectionChange(ingredient);
 
                   if (!success) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content:
-                        Text("You can't select more than 5 ingredients!"),
+                            Text("You can't select more than 5 ingredients!"),
                       ),
                     );
                   }
                 },
+                onLongPress: isSelected
+                    ? () {
+                        ingredientListViewModel.resetSelectedList();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content:
+                                    Text("deleted all selected ingredients!")));
+                      }
+                    : null,
               );
             }).toList(),
           ),

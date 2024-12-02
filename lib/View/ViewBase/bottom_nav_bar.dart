@@ -49,6 +49,7 @@ class _BottomNavBarState extends State<BottomNavBar>
           labelStyle:
               const TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
           labelColor: AppStyles.textColor,
+          indicatorColor: AppStyles.textColor,
           tabs: const [
             Tab(
               text: 'Home Screen',

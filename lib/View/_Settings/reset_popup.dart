@@ -13,6 +13,7 @@ class _ResetPopupState extends State<ResetPopup> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: AppStyles.bgColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -23,15 +24,12 @@ class _ResetPopupState extends State<ResetPopup> {
       actions: [
         TextButton(
             onPressed: () {
-              setState(() {
-                // RESET
-              });
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(true);
             },
             child: const Text("Proceed")),
         TextButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(false);
             },
             child: const Text("Cancel"))
       ],

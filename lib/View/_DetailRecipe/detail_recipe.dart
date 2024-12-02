@@ -1,8 +1,11 @@
 import 'dart:typed_data';
+import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:group_project/View/ViewAsset/styles/app_styles.dart';
 import 'package:provider/provider.dart';
 import '../../Model/recipe.dart';
 import '../../ViewModel/recipe_list_view_model.dart';
+import '../ViewBase/app_bar.dart';
 
 class DetailRecipe extends StatelessWidget {
   final Recipe recipe;
@@ -21,26 +24,30 @@ class DetailRecipe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ViewModel을 listen: false로 가져와서 상태 변경을 구독하지 않음
-    final recipeListViewModel = Provider.of<RecipeListViewModel>(context, listen: false);
+    final recipeListViewModel =
+        Provider.of<RecipeListViewModel>(context, listen: false);
 
     // 스냅샷으로 데이터 가져오기 (정적 데이터로 가져오기!)
     final recipeSnapshot = recipeListViewModel.getRecipeSnapshot(recipe);
 
     // isStarred 상태만 구독해서 전체 리빌드하게 하지 않기!
     final isStarred = context.select<RecipeListViewModel, bool>(
-          (viewModel) => viewModel.getIsStarred(recipe),
+      (viewModel) => viewModel.getIsStarred(recipe),
     );
 
     final Uint8List imageBytes = recipe.imageBytes;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(recipeSnapshot['title']),
+      appBar: CustomAppBar(
+        title: recipeSnapshot['title'],
+        showBackButton: true,
         actions: [
           IconButton(
             icon: Icon(
-              isStarred ? Icons.star : Icons.star_border, // 아이콘 결정
-              color: isStarred ? Colors.yellow : Colors.grey, // 색상 결정
+              isStarred
+                  ? FluentSystemIcons.ic_fluent_star_filled
+                  : FluentSystemIcons.ic_fluent_star_regular, // 아이콘 결정
+              color: isStarred ? AppStyles.textColor : AppStyles.textColor, // 색상 결정
             ),
             onPressed: () {
               recipeListViewModel.changeStarred(recipe); // 상태 변경
@@ -55,9 +62,13 @@ class DetailRecipe extends StatelessWidget {
           children: [
             Image.memory(imageBytes),
             const SizedBox(height: 16.0),
-            Text(
-              recipeSnapshot['content'],
-              style: Theme.of(context).textTheme.bodyLarge,
+            Column(
+              children: [
+                Text(
+                  recipe.recipeContent.split('\n').first,
+                  style: AppStyles.textStyle,
+                ),
+              ],
             ),
           ],
         ),
