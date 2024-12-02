@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:group_project/View/_HomeScreen/ai_text.dart';
@@ -42,110 +41,37 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "What are you Cooking Today?"),
-      body: Stack(
+      body: ListView(
         children: [
-          ListView(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AIText(
-                    targetText: targetText, // 상태로 전달된 텍스트
-                  ),
-                  Consumer<DataSourceViewModel>(
-                    builder: (context, viewModel, child) {
-                      return viewModel.recommendedRecipe != null
-                          ? RecipeSection(recipe: viewModel.recommendedRecipe!)
-                          : Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text(
-                                  'PAPA wanna recommend you some Recipes!\nClick the Recommend Button!',
-                                  style: AppStyles.textStyle,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            );
-                    },
-                  ),
-                ],
+              AIText(
+                targetText: targetText, // 상태로 전달된 텍스트
               ),
-            ],
-          ),
-          Positioned(
-            bottom: 16,
-            right: 16,
-            child: FloatingActionButton.extended(
-              onPressed: () async {
-                try {
-                  showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (BuildContext context) {
-                        return PopScope(
-                          canPop: false,
-                          child: AlertDialog(
-                            titlePadding: const EdgeInsets.all(20),
-                            title: Center(
-                              child: Text(
-                                "Wait a minute!",
-                                style: AppStyles.headLineStyle2
-                                    .copyWith(color: AppStyles.textColor),
-                              ),
-                            ),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CircularProgressIndicator(
-                                    color: AppStyles.textColor),
-                                const SizedBox(height: 20),
-                                Text(
-                                  "PAPA is cooking recipes for you.",
-                                  style: AppStyles.textStyle,
-                                ),
-                                Text(
-                                  "DON'T TURN OFF THIS APP!",
-                                  style: AppStyles.textStyle
-                                      .copyWith(color: AppStyles.textColor),
-                                )
-                              ],
+              Consumer<DataSourceViewModel>(
+                builder: (context, viewModel, child) {
+                  return viewModel.recommendedRecipe != null
+                      ? RecipeSection(recipe: viewModel.recommendedRecipe!)
+                      : Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              'PAPA wanna recommend you some Recipes!\nClick the Recommend Button!',
+                              style: AppStyles.textStyle,
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         );
-                      });
-
-                  final recipe = await Future.any([
-                    context.read<DataSourceViewModel>().generateRecipeFromUsedIngredients(),
-                    Future.delayed(const Duration(minutes: 3), () {
-                      throw TimeoutException("Recipe generation timed out after 3 minutes.");
-                    }),
-                  ]);
-                  Navigator.pop(context);
-
-                  if (recipe == null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                            'No recipes recommended! Please use it in a minute.'),
-                      ),
-                    );
-                  }
-                } catch (e) {
-                  // 타임아웃 예외 처리
-                  Navigator.pop(context); // 로딩창 닫기
-                  print('Failed to generate recipes: $e');
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('Failed to generate recipes: $e')));
-                }
-              },
-              backgroundColor: AppStyles.bgColor,
-              label: const RecommendButton(),
-            ),
+                },
+              ),
+            ],
           ),
         ],
       ),
       backgroundColor: AppStyles.bgColor,
+      floatingActionButton: const RecommendButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

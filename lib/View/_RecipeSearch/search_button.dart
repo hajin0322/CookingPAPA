@@ -102,8 +102,9 @@ class SearchButton extends StatelessWidget {
         }
       },
       backgroundColor: AppStyles.bgColor,
-      label: Text("Start Cooking", style: AppStyles.headLineStyle3),
-      icon: const Icon(Icons.search),
+      label: Text("Start Cooking",
+          style: AppStyles.headLineStyle3.copyWith(color: AppStyles.textColor)),
+      icon: Icon(Icons.search, color: AppStyles.textColor,),
     );
   }
 }
