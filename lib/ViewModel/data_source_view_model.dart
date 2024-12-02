@@ -218,52 +218,75 @@ Image Prompt: <image prompt>
   Future<List<Recipe>> generateMultipleRecipes(
       String ingredients, int count) async {
     List<Recipe> recipes = [];
-    for (int i = 0; i < count; i++) {
-      final response = await generateCookingIdeas(ingredients);
-      final aiResult = _parseAIResponse(response);
-      final aiImage = await generateImage(aiResult['imagePrompt']);
 
-      if (aiImage != null) {
-        // Uint8List 이미지만 base64로 인코딩
-        String base64Image = base64Encode(aiImage);
+    try {
+      for (int i = 0; i < count; i++) {
+        try {
+          // Generate cooking ideas
+          final response = await generateCookingIdeas(ingredients);
+          if (response == 'AI Error') throw Exception('Llama3 Network Error');
+          final aiResult = _parseAIResponse(response);
 
-        Recipe result = Recipe(
-            recipeTitle: aiResult['dishName'],
-            recipeImage: base64Image, // base64로 인코딩된 이미지
-            recipeContent: aiResult['description']);
-        recipes.add(result);
-      } else {
-        print('Failed to generate image for recipe ${aiResult['dishName']}');
-        // 이미지 생성 실패 시 처리
+          // Generate image
+          final aiImage = await generateImage(aiResult['imagePrompt']);
+          if (aiImage != null) {
+            // Convert image to base64
+            String base64Image = base64Encode(aiImage);
+
+            Recipe result = Recipe(
+              recipeTitle: aiResult['dishName'],
+              recipeImage: base64Image, // base64-encoded image
+              recipeContent: aiResult['description'],
+            );
+            recipes.add(result);
+          } else {
+            throw Exception('Stable Diffusion Network Error');
+          }
+        } catch (e) {
+          // Handle errors specific to this recipe generation step
+          print('Error during recipe generation for index $i: $e');
+          rethrow; // Rethrow exception to propagate to higher-level handler
+        }
       }
+    } catch (e) {
+      // Handle errors in the overall process
+      print('Error during multiple recipe generation: $e');
+      rethrow; // Rethrow exception to propagate to higher-level handler
     }
+
     notifyListeners();
     return recipes;
   }
 
   Future<Recipe?> generateRecipeFromUsedIngredients() async {
-    // FileIO에서 사용된 재료들 불러오기
-    final fileIO = FileIO();
-    final usedIngredientsQueue = await fileIO.loadUsedIngredients();
+    try {
+      // FileIO에서 사용된 재료들 불러오기
+      final fileIO = FileIO();
+      final usedIngredientsQueue = await fileIO.loadUsedIngredients();
 
-    if (usedIngredientsQueue.length == 0) {
-      print('No used ingredients found');
-      return null;
-    }
+      if (usedIngredientsQueue.length == 0) {
+        print('No used ingredients found');
+        return null;
+      }
 
-    // 사용된 재료들의 이름을 문자열로 변환
-    final usedIngredients = usedIngredientsQueue.items
-        .map((ingredient) => ingredient.name)
-        .join(', ');
+      // 사용된 재료들의 이름을 문자열로 변환
+      final usedIngredients = usedIngredientsQueue.items
+          .map((ingredient) => ingredient.name)
+          .join(', ');
 
-    print('Generating recipe from used ingredients: $usedIngredients');
+      print('Generating recipe from used ingredients: $usedIngredients');
 
-    // 기존 함수 재사용
-    final recipes = await generateMultipleRecipes(usedIngredients, 1);
-    if (recipes.isNotEmpty) {
-      recommendedRecipe = recipes.first;
-      notifyListeners();
-      return recommendedRecipe;
+      // 기존 함수 재사용
+      final recipes = await generateMultipleRecipes(usedIngredients, 1);
+      if (recipes.isNotEmpty) {
+        recommendedRecipe = recipes.first;
+        notifyListeners();
+        return recommendedRecipe;
+      }
+    } catch (e) {
+      // FileIO 관련 예외 처리
+      print('Error loading used ingredients: $e');
+      rethrow;
     }
     return null;
   }

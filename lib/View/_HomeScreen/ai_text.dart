@@ -15,7 +15,7 @@ class AIText extends StatefulWidget {
 
 class _AITextState extends State<AIText> {
   /// 현재 화면에 표시되고 있는 텍스트
-  String displayedText = '';
+  String displayedText = '...';
 
   /// 현재 표시할 문자 인덱스를 추적
   int currentIndex = 0;
@@ -29,11 +29,11 @@ class _AITextState extends State<AIText> {
   @override
   void initState() {
     super.initState();
-    if (widget.targetText == "AI Error") {
-      targetText = 'Loading AI Response...';
+    if (widget.targetText.startsWith("API Error") || widget.targetText == "AI Error") {
+      targetText = '(PAPA is busy! Please talk to him in a minute.\n-Assistant Chef-)';
+    } else {
+      targetText = widget.targetText;
     }
-
-    targetText = widget.targetText; // 초기 텍스트 설정
     startTypingAnimation();
   }
 
@@ -42,7 +42,11 @@ class _AITextState extends State<AIText> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.targetText != widget.targetText) {
       resetAnimation(); // 애니메이션 리셋
-      targetText = widget.targetText; // 새로운 텍스트로 업데이트
+      if (widget.targetText.startsWith("API Error") || widget.targetText == "AI Error") {
+        targetText = 'PAPA is busy! Please talk to him in a minute.\n-Assistant Chef-';
+      } else {
+        targetText = widget.targetText;
+      }
       startTypingAnimation(); // 애니메이션 재시작
     }
   }

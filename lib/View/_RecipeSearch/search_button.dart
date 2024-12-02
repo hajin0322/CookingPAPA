@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:group_project/ViewModel/data_source_view_model.dart';
 import 'package:provider/provider.dart';
@@ -72,8 +74,14 @@ class SearchButton extends StatelessWidget {
               });
 
           // Generate recipes using AI
-          final recipes = await dataSourceViewModel.generateMultipleRecipes(
-              combinedIngredients, 3);
+          // 타임아웃 구현
+          final recipes = await Future.any([
+            dataSourceViewModel.generateMultipleRecipes(combinedIngredients, 3),
+            Future.delayed(const Duration(minutes: 3), () {
+              throw TimeoutException(
+                  "Recipe generation timed out after 3 minutes.");
+            }),
+          ]);
 
           Navigator.pop(context);
 
@@ -86,9 +94,11 @@ class SearchButton extends StatelessWidget {
           );
           ingredientViewModel.addUsedIngredient(selectedIngredients);
         } catch (e) {
+          // 타임아웃 예외 처리
+          Navigator.pop(context); // 로딩창 닫기
+          print('Failed to generate recipes: $e');
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to generate recipes: $e')),
-          );
+              SnackBar(content: Text('Failed to generate recipes: $e')));
         }
       },
       backgroundColor: AppStyles.bgColor,
