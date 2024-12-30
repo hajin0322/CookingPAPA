@@ -1,41 +1,43 @@
-# Daffy's Rebellion.
+# Daffy's Rebellion.
 
-lib
-├── DataSource
+lib/
+├── DataSource/
 │   └── data_source_model.dart
-├── Model
-│   ├── data_source_model.dart
+├── Model/
 │   ├── ingredient_list.dart
 │   ├── ingredient.dart
 │   └── recipe.dart
-├── Repository
+├── Repository/
+│   └── fileIO.dart
 │   └── ingredient_list_repository.dart
-├── View
-│   ├── _DetailRecipe
+├── View/
+│   ├── _DetailRecipe/
 │   │   ├── detail_recipe.dart
 │   │   └── recipe_section.dart
-│   ├── _HomeScreen
+│   ├── _HomeScreen/
 │   │   ├── ai_text.dart
 │   │   └── home_screen.dart
-│   ├── _MyFridge
+│   │   └── recommend_button.dart
+│   ├── _MyFridge/
 │   │   └── my_fridge.dart
-│   ├── _RecipeSearch
+│   ├── _RecipeSearch/
 │   │   ├── recipe_search_results.dart
 │   │   ├── recipe_search.dart
 │   │   └── search_categories.dart
-│   ├── _Settings
+│   │   └── search_button.dart
+│   ├── _Settings/
 │   │   ├── app_info_popup.dart
 │   │   ├── reset_popup.dart
 │   │   ├── settings_section.dart
 │   │   └── settings.dart
-│   ├── ViewAsset
-│   │   ├── styles
+│   ├── ViewAsset/
+│   │   ├── styles/
 │   │   │   └── app_styles.dart
 │   │   └── media.dart
-│   └── ViewBase
+│   └── ViewBase/
 │       ├── app_bar.dart
 │       └── bottom_nav_bar.dart
-├── ViewModel
+├── ViewModel/
 │   ├── data_source_view_model.dart
 │   ├── ingredient_list_view_model.dart
 │   └── recipe_view_model.dart
