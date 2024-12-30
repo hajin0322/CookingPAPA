@@ -8,7 +8,7 @@ lib/
 │   ├── ingredient.dart
 │   └── recipe.dart
 ├── Repository/
-│   └── fileIO.dart
+│   ├── fileIO.dart
 │   └── ingredient_list_repository.dart
 ├── View/
 │   ├── _DetailRecipe/
@@ -16,14 +16,14 @@ lib/
 │   │   └── recipe_section.dart
 │   ├── _HomeScreen/
 │   │   ├── ai_text.dart
-│   │   └── home_screen.dart
+│   │   ├── home_screen.dart
 │   │   └── recommend_button.dart
 │   ├── _MyFridge/
 │   │   └── my_fridge.dart
 │   ├── _RecipeSearch/
 │   │   ├── recipe_search_results.dart
 │   │   ├── recipe_search.dart
-│   │   └── search_categories.dart
+│   │   ├── search_categories.dart
 │   │   └── search_button.dart
 │   ├── _Settings/
 │   │   ├── app_info_popup.dart
