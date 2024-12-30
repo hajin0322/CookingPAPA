@@ -36,7 +36,7 @@ lib/
 │   │   └── media.dart
 │   └── ViewBase/
 │       ├── app_bar.dart
-│       └── bottom_nav_bar.dart
+│       └── bottom_nav_bar.dart  
 ├── ViewModel/
 │   ├── data_source_view_model.dart
 │   ├── ingredient_list_view_model.dart
